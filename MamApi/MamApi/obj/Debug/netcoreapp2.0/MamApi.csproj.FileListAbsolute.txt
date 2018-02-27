@@ -1,0 +1,17 @@
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.deps.json
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.runtimeconfig.json
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.runtimeconfig.dev.json
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.dll
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.pdb
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Data.dll
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Models.dll
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Data.pdb
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Models.pdb
+C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.csprojResolveAssemblyReference.cache
+C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.csproj.CoreCompileInputs.cache
+C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.AssemblyInfoInputs.cache
+C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.AssemblyInfo.cs
+C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.dll
+C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.pdb
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Services.dll
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Services.pdb

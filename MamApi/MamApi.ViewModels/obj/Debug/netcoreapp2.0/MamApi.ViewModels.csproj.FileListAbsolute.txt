@@ -1,0 +1,9 @@
+C:\Projects\mam\MamApi\MamApi.ViewModels\bin\Debug\netcoreapp2.0\MamApi.ViewModels.deps.json
+C:\Projects\mam\MamApi\MamApi.ViewModels\bin\Debug\netcoreapp2.0\MamApi.ViewModels.dll
+C:\Projects\mam\MamApi\MamApi.ViewModels\bin\Debug\netcoreapp2.0\MamApi.ViewModels.pdb
+C:\Projects\mam\MamApi\MamApi.ViewModels\obj\Debug\netcoreapp2.0\MamApi.ViewModels.csprojResolveAssemblyReference.cache
+C:\Projects\mam\MamApi\MamApi.ViewModels\obj\Debug\netcoreapp2.0\MamApi.ViewModels.csproj.CoreCompileInputs.cache
+C:\Projects\mam\MamApi\MamApi.ViewModels\obj\Debug\netcoreapp2.0\MamApi.ViewModels.AssemblyInfoInputs.cache
+C:\Projects\mam\MamApi\MamApi.ViewModels\obj\Debug\netcoreapp2.0\MamApi.ViewModels.AssemblyInfo.cs
+C:\Projects\mam\MamApi\MamApi.ViewModels\obj\Debug\netcoreapp2.0\MamApi.ViewModels.dll
+C:\Projects\mam\MamApi\MamApi.ViewModels\obj\Debug\netcoreapp2.0\MamApi.ViewModels.pdb
