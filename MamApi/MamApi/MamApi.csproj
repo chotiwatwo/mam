@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Compile Remove="Controllers\SalesmansController.cs" />
   </ItemGroup>
 
   <ItemGroup>

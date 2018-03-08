@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MamApi.Data.Repositories;
 
 namespace MamApi
 {
@@ -30,8 +31,14 @@ namespace MamApi
             services.AddDbContext<MamApiDb>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("MAMDb")));
 
-            services.AddScoped<IRepository<MktApplication>, MktApplicationRepository>();
+            // Register MAM Services
+            services.AddScoped<IAppService, AppService>();
+            services.AddScoped<IMasterService, MasterService>();
 
+            // Register MAM Repository
+            services.AddTransient<IAppRepository, MktApplicationRepository>();
+            services.AddTransient<IMasterRepository, MasterRepository>();
+            
             services.AddMvc();
         }
 
@@ -43,7 +50,15 @@ namespace MamApi
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.UseStaticFiles();
+
             app.UseMvc();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Apps}/{action=test}/{id?}");
+            //});
         }
     }
 }

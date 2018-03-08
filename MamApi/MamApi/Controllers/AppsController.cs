@@ -6,6 +6,7 @@ using MamApi.Models;
 using MamApi.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MamApi.Services;
 
 namespace MamApi.Controllers
 {
@@ -13,16 +14,21 @@ namespace MamApi.Controllers
     [Route("api/Apps")]
     public class AppsController : Controller
     {
-        private readonly IRepository<MktApplication> _repo;
+        private readonly IAppService AppService;
 
-        public AppsController(IRepository<MktApplication> repo)
+        public AppsController(IAppService appService)
         {
-            _repo = repo;
+            this.AppService = appService;
+        }
+
+        [HttpGet("test")]
+        public IActionResult test() {
+            return Ok("Yes");
         }
 
         [HttpGet]
         public IActionResult GetApps() {
-            var apps = _repo.FetchAll();
+            var apps = AppService.GetApps();
 
             return Ok(apps);
         }
@@ -30,18 +36,20 @@ namespace MamApi.Controllers
         [HttpGet("{appNo}")]
         public IActionResult GetApp(string appNo)
         {
-            var app = _repo.FindByKey(appNo);
+            var app = AppService.GetApp(appNo);
 
-            //var app = _repo.Query(a => a.MKT_Application_CurrentCarID == 138690);
+            //var app = _repo.FindByInclude(a => a.MKT_Application_ID == appNo, b => b.Branch);
 
             return Ok(app);
         }
 
         [HttpPost]
         public IActionResult CreateApp([FromBody] MktApplication app) {
-            var createdApp = _repo.Add(app);
+            //var createdApp = _repo.Add(app);
 
-            _repo.Save();
+            //_repo.Commit();
+
+            var createdApp = AppService.CreateApp(app);
 
             return Ok(createdApp);
         }
@@ -49,26 +57,30 @@ namespace MamApi.Controllers
         [HttpPut("{appNo}")]
         public IActionResult UpdateApp(string appNo)
         {
-            var updatedApp = _repo.FindByKey(appNo);
+            //var updatedApp = _repo.FindByKey(appNo);
 
-            updatedApp.MKT_Application_ActiveContract_AppID = "Test";
-            updatedApp.MKT_Application_DealerID = "333";
+            //updatedApp.MKT_Application_ActiveContract_AppID = "Test";
+            //updatedApp.MKT_Application_DealerID = "333";
 
-            _repo.Save();
+            //_repo.Commit();
 
-            return Ok(updatedApp);
+            //return Ok(updatedApp);
+
+            return NoContent();
         }
 
         [HttpDelete("{appNo}")]
         public IActionResult DeleteApp(string appNo)
         {
-            var deletedApp = _repo.FindByKey(appNo);
+            //var deletedApp = _repo.FindByKey(appNo);
 
-            _repo.Remove(deletedApp);
+            //_repo.Remove(deletedApp);
 
-            _repo.Save();
+            //_repo.Commit();
 
-            return Ok();
+            //return Ok();
+
+            return NoContent();
         }
 
     }

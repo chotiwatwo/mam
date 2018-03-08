@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ISalesmanRepository.cs" />
+    <Compile Remove="SalesmanRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MamApi.Data\MamApi.Data.csproj" />
   </ItemGroup>
 

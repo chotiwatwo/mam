@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MamApi.Models
 {
@@ -10,6 +11,10 @@ namespace MamApi.Models
         public string MKT_Application_ID { get; set; }
 
         public string MKT_Application_BranchID { get; set; }
+
+        [ForeignKey("MKT_Application_BranchID")]
+        public Branch Branch { get; set; }
+
         public string MKT_Application_ContractNo { get; set; }
         public long? MKT_Application_CurrentCarID { get; set; }
         public string MKT_Application_ActiveContract_AppID { get; set; }

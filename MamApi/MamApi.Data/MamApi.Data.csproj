@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="HPCSDb.cs" />
+    <Compile Remove="HPPRODb.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MamApi.Models\MamApi.Models.csproj" />
   </ItemGroup>
 
