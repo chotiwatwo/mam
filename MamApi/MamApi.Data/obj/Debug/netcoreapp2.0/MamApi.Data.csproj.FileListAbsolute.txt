@@ -9,3 +9,5 @@ C:\Projects\mam\MamApi\MamApi.Data\bin\Debug\netcoreapp2.0\MamApi.Models.dll
 C:\Projects\mam\MamApi\MamApi.Data\bin\Debug\netcoreapp2.0\MamApi.Models.pdb
 C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.dll
 C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.pdb
+C:\Projects\mam\MamApi\MamApi.Data\bin\Debug\netcoreapp2.0\System.Data.SqlClient.dll
+C:\Projects\mam\MamApi\MamApi.Data\bin\Debug\netcoreapp2.0\System.Data.SqlClient.xml

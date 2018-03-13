@@ -36,11 +36,25 @@ namespace MamApi.Controllers
         [HttpGet("{appNo}")]
         public IActionResult GetApp(string appNo)
         {
-            var app = AppService.GetApp(appNo);
+            try
+            {
+                var app = AppService.GetApp(appNo);
 
-            //var app = _repo.FindByInclude(a => a.MKT_Application_ID == appNo, b => b.Branch);
+                if (app == null)
+                {
+                    //return NotFound($"Application No : [{ appNo }] was not found");
+                    return NotFound($"ไม่พบเลขที่ใบคำขอ : [{ appNo }] ในระบบ");
+                }
 
-            return Ok(app);
+                return Ok(app);
+            }
+            catch
+            {
+
+                
+            }
+
+            return BadRequest();
         }
 
         [HttpPost]
