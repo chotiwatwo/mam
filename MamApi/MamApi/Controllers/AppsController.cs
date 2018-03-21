@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MamApi.Models;
 using MamApi.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MamApi.Services;
+using MamApi.Models.Resources;
+using AutoMapper;
+using MamApi.Models;
 
 namespace MamApi.Controllers
 {
@@ -15,10 +17,12 @@ namespace MamApi.Controllers
     public class AppsController : Controller
     {
         private readonly IAppService AppService;
+        private readonly IMapper mapper;
 
-        public AppsController(IAppService appService)
+        public AppsController(IAppService appService, IMapper mapper)
         {
             this.AppService = appService;
+            this.mapper = mapper;
         }
 
         [HttpGet("test")]
@@ -58,12 +62,18 @@ namespace MamApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateApp([FromBody] MktApplication app) {
+        public IActionResult CreateApp([FromBody] CreateAppResource app) {
             //var createdApp = _repo.Add(app);
 
             //_repo.Commit();
 
-            var createdApp = AppService.CreateApp(app);
+            var mktApp = mapper.Map<CreateAppResource, MktApplication>(app);
+
+            var mktCustomer = mapper.Map<CreateCustomerResource, MktCustomer>(app.Customer);
+
+            mktApp.Customer = mktCustomer;
+
+            var createdApp = AppService.CreateApp(mktApp);
 
             return Ok(createdApp);
         }

@@ -12,6 +12,7 @@ namespace MamApi.Models
         //,[Branch_BranchName]
 
         [Key]
+        [StringLength(10)]
         public string Branch_BranchID { get; set; }
 
         public string Branch_BranchName { get; set; }

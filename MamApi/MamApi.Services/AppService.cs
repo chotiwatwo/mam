@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MamApi.Data.Repositories;
 using MamApi.Models;
 
@@ -29,15 +26,28 @@ namespace MamApi.Services
 
         public MktApplication CreateApp(MktApplication app)
         {
-            //var context = this.Repo.GetDbContext();
+            string appMaxId = this.Repo.GetMaxApplicationIdByUserId("ST12511"); // ST12511
 
-            //if (context != null) {
-            //    context.Database.
-            //}
+            //var createdApp = new MktApplication
+            //{
+            //    AppId = appMaxId
+            //};
 
-            string appMaxId = this.Repo.GetMaxApplicationIdByUserId("SJ13411"); // ST12511
+            app.AppId = appMaxId;
+            app.CreatedBy = "Admin";
+            app.CreatedDate = DateTime.Now;
+            app.AppOwnerId = "ST12511";
+            app.BranchId = appMaxId.Substring(0, 2);
 
-            app.MKT_Application_ID = appMaxId;
+            app.Status = "A";
+            app.AppStatusPreSubmitDate = DateTime.Now;
+
+            app.Customer.Id = 999998;
+            app.Customer.Status = "A";
+
+            Repo.Add(app);
+
+            Repo.Commit();
 
             return app;
         }
@@ -52,7 +62,7 @@ namespace MamApi.Services
         public IEnumerable<MktApplication> GetApps()
         {
             var apps = Repo.FindByInclude(
-                a => a.MKT_Application_ID.StartsWith("0161"), 
+                a => a.AppId.StartsWith("0161"), 
                 b => b.Branch);
 
             return apps;

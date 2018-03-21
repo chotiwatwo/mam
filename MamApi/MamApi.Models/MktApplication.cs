@@ -8,26 +8,57 @@ namespace MamApi.Models
     public partial class MktApplication
     {
         [Key]
-        public string MKT_Application_ID { get; set; }
+        [Column("MKT_Application_ID")]
+        public string AppId { get; set; }
 
-        public string MKT_Application_BranchID { get; set; }
+        [Column("MKT_Application_BranchID")]
+        [StringLength(10)]
+        public string BranchId { get; set; }
 
-        [ForeignKey("MKT_Application_BranchID")]
+        //[ForeignKey("MKT_Application_BranchID")]
         public Branch Branch { get; set; }
 
-        public string MKT_Application_ContractNo { get; set; }
-        public long? MKT_Application_CurrentCarID { get; set; }
-        public string MKT_Application_ActiveContract_AppID { get; set; }
-        public string MKT_Application_DealerID { get; set; }
+        //public string MKT_Application_ContractNo { get; set; }
+        //public long? MKT_Application_CurrentCarID { get; set; }
+        //public string MKT_Application_ActiveContract_AppID { get; set; }
+        //public string MKT_Application_DealerID { get; set; }
 
         [Required]
-        public string MKT_Application_AppStatus { get; set; }
+        [Column("MKT_Application_AppStatus")]
+        public string AppStatus { get; set; }
 
         [Required]
-        public string MKT_Application_OwnerID { get; set; }
+        [Column("MKT_Application_OwnerID")]
+        public string AppOwnerId { get; set; }
 
         [Required]
-        public string MKT_Application_Status { get; set; }
+        [Column("MKT_Application_Status")]
+        public string Status { get; set; }
+
+        //public IList<int> CustomerIds { get; set; }
+        
+        public MktCustomer Customer { get; set; }
+
+        [Column("MKT_Application_CreateBy")]
+        public string CreatedBy { get; set; }
+
+        [Column("MKT_Application_CreateDate")]
+        public DateTime CreatedDate { get; set; }
+
+        [Column("MKT_Application_AppStatus_PreSubmitDate")]
+        public DateTime AppStatusPreSubmitDate { get; set; }
+
+        [Column("MKT_Application_CurrentAppStatus")]
+        public string CurrentAppStatus { get; set; }
+
+        [Column("MKT_Application_MKTUsersLatest")]
+        public string LatestMarketingUserId { get; set; }
+
+        [Column("MKT_Application_UsersLatest")]
+        public string LatestUserId { get; set; }
+
+        [Column("MKT_Application_MKTLastApplogID")]
+        public long AppLogId { get; set; }
 
         /*
         public string MktApplicationCimbbranchCode { get; set; }
@@ -78,5 +109,6 @@ namespace MamApi.Models
         public long? MktApplicationVerlastApplogId { get; set; }
         public string MktApplicationFastTrack { get; set; }
         */
+
     }
 }
