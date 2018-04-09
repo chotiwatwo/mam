@@ -3,10 +3,8 @@ C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\MamApi.Services.d
 C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\MamApi.Services.pdb
 C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\MamApi.Data.dll
 C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\MamApi.Models.dll
-C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\Microsoft.EntityFrameworkCore.dll
 C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\MamApi.Data.pdb
 C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\MamApi.Models.pdb
-C:\Projects\mam\MamApi\MamApi.Services\bin\Debug\netcoreapp2.0\Microsoft.EntityFrameworkCore.xml
 C:\Projects\mam\MamApi\MamApi.Services\obj\Debug\netcoreapp2.0\MamApi.Services.csprojResolveAssemblyReference.cache
 C:\Projects\mam\MamApi\MamApi.Services\obj\Debug\netcoreapp2.0\MamApi.Services.csproj.CoreCompileInputs.cache
 C:\Projects\mam\MamApi\MamApi.Services\obj\Debug\netcoreapp2.0\MamApi.Services.AssemblyInfoInputs.cache

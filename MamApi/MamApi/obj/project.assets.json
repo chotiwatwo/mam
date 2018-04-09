@@ -5093,7 +5093,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
-          "MamApi.Data": "1.0.0"
+          "MamApi.Data": "1.0.0",
+          "Microsoft.AspNetCore.All": "2.0.5"
         },
         "compile": {
           "bin/placeholder/MamApi.Services.dll": {}

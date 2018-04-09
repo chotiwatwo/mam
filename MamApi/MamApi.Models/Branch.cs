@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace MamApi.Models
@@ -12,9 +13,10 @@ namespace MamApi.Models
         //,[Branch_BranchName]
 
         [Key]
-        [StringLength(10)]
-        public string Branch_BranchID { get; set; }
+        [Column("Branch_BranchID")]
+        public string Id { get; set; }
 
-        public string Branch_BranchName { get; set; }
+        [Column("Branch_BranchName")]
+        public string Name { get; set; }
     }
 }

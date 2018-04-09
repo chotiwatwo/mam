@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MamApi.Data;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MamApi.Services;
 using MamApi.Models.Resources;
 using AutoMapper;
 using MamApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MamApi.Controllers
 {
+    
     [Produces("application/json")]
     [Route("api/Apps")]
     public class AppsController : Controller
     {
-        private readonly IAppService AppService;
-        private readonly IMapper mapper;
+        private readonly IAppService _appService;
+        private readonly IAuthService _authService;
+        private readonly IMapper _mapper;
 
-        public AppsController(IAppService appService, IMapper mapper)
+        public AppsController(IAppService appService, IAuthService authService, IMapper mapper)
         {
-            this.AppService = appService;
-            this.mapper = mapper;
+            _appService = appService;
+            _authService = authService;
+            _mapper = mapper;
         }
 
         [HttpGet("test")]
@@ -32,7 +31,7 @@ namespace MamApi.Controllers
 
         [HttpGet]
         public IActionResult GetApps() {
-            var apps = AppService.GetApps();
+            var apps = _appService.GetApps();
 
             return Ok(apps);
         }
@@ -42,7 +41,7 @@ namespace MamApi.Controllers
         {
             try
             {
-                var app = AppService.GetApp(appNo);
+                var app = _appService.GetApp(appNo);
 
                 if (app == null)
                 {
@@ -61,19 +60,19 @@ namespace MamApi.Controllers
             return BadRequest();
         }
 
+        [Authorize]
         [HttpPost]
-        public IActionResult CreateApp([FromBody] CreateAppResource app) {
-            //var createdApp = _repo.Add(app);
+        public async Task<IActionResult> CreateApp([FromBody] CreateAppResource app)
+        {
+            string branchId = await _authService.GetBranchIdFromUserProfile(HttpContext);
 
-            //_repo.Commit();
+            var mktApp = _mapper.Map<CreateAppResource, MktApplication>(app);
 
-            var mktApp = mapper.Map<CreateAppResource, MktApplication>(app);
-
-            var mktCustomer = mapper.Map<CreateCustomerResource, MktCustomer>(app.Customer);
+            var mktCustomer = _mapper.Map<CreateCustomerResource, MktCustomer>(app.Customer);
 
             mktApp.Customer = mktCustomer;
 
-            var createdApp = AppService.CreateApp(mktApp);
+            var createdApp = _appService.CreateApp(mktApp);
 
             return Ok(createdApp);
         }

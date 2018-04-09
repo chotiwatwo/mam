@@ -10,16 +10,16 @@ namespace MamApi.Services
 {
     public class MasterService : IMasterService
     {
-        private readonly IMasterRepository Repo;
+        private readonly IMasterRepository _repo;
 
         public MasterService(IMasterRepository repo)
         {
-            this.Repo = repo;
+            _repo = repo;
         }
         
         public IEnumerable<MasterInfo> GetMasterInfosByType(string infoType, string infoStatus)
         {
-            var masterInfos = Repo.Query(m => m.Type == infoType && m.Status == infoStatus);
+            var masterInfos = _repo.Query(m => m.Type == infoType && m.Status == infoStatus);
 
             return masterInfos;
         }

@@ -11,16 +11,16 @@ namespace MamApi.Data
 {
     public class MktApplicationRepository : RepositoryBase<MktApplication>, IAppRepository
     {
-        private readonly MamApiDb Context;
+        private readonly MamApiDb _context;
 
         public MktApplicationRepository(MamApiDb context) : base(context)
         {
-            this.Context = context;
+            _context = context;
         }
 
         private string GetMaxApplicationIdUsingStoredProc(string userId)
         {
-            using (var command = this.Context.Database.GetDbConnection().CreateCommand())
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
                 string maxAppId = string.Empty;
 

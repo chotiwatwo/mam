@@ -7,11 +7,11 @@ namespace MamApi.Services
 {
     public class AppService : IAppService
     {
-        private readonly IAppRepository Repo;
+        private readonly IAppRepository _repo;
 
         public AppService(IAppRepository repo)
         {
-            this.Repo = repo;
+            _repo = repo;
         }
 
         public void CancelApp()
@@ -26,7 +26,7 @@ namespace MamApi.Services
 
         public MktApplication CreateApp(MktApplication app)
         {
-            string appMaxId = this.Repo.GetMaxApplicationIdByUserId("ST12511"); // ST12511
+            string appMaxId = _repo.GetMaxApplicationIdByUserId("ST12511"); // ST12511
 
             //var createdApp = new MktApplication
             //{
@@ -45,23 +45,23 @@ namespace MamApi.Services
             app.Customer.Id = 999998;
             app.Customer.Status = "A";
 
-            Repo.Add(app);
+            _repo.Add(app);
 
-            Repo.Commit();
+            _repo.Commit();
 
             return app;
         }
 
         public MktApplication GetApp(string appNo)
         {
-            var app = Repo.FindByKey(appNo);
+            var app = _repo.FindByKey(appNo);
 
             return app;
         }
 
         public IEnumerable<MktApplication> GetApps()
         {
-            var apps = Repo.FindByInclude(
+            var apps = _repo.FindByInclude(
                 a => a.AppId.StartsWith("0161"), 
                 b => b.Branch);
 

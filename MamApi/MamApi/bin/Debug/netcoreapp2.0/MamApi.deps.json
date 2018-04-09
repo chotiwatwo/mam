@@ -4114,7 +4114,8 @@
       },
       "MamApi.Services/1.0.0": {
         "dependencies": {
-          "MamApi.Data": "1.0.0"
+          "MamApi.Data": "1.0.0",
+          "Microsoft.AspNetCore.All": "2.0.5"
         },
         "runtime": {
           "MamApi.Services.dll": {}
