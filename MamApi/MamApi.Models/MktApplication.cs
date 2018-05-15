@@ -39,14 +39,18 @@ namespace MamApi.Models
         
         public MktCustomer Customer { get; set; }
 
+        public MktApplicationExtend ApplicationExtend { get; set; }
+
+        public MktAnnotation Annotation { get; set; }
+
         [Column("MKT_Application_CreateBy")]
         public string CreatedBy { get; set; }
 
         [Column("MKT_Application_CreateDate")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [Column("MKT_Application_AppStatus_PreSubmitDate")]
-        public DateTime AppStatusPreSubmitDate { get; set; }
+        public DateTime? AppStatusPreSubmitDate { get; set; }
 
         [Column("MKT_Application_CurrentAppStatus")]
         public string CurrentAppStatus { get; set; }
@@ -58,7 +62,8 @@ namespace MamApi.Models
         public string LatestUserId { get; set; }
 
         [Column("MKT_Application_MKTLastApplogID")]
-        public long AppLogId { get; set; }
+        public long LastAppLogId { get; set; }
+
 
         /*
         public string MktApplicationCimbbranchCode { get; set; }

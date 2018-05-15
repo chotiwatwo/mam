@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MamApi.Models.Resources
+﻿namespace MamApi.Models.Resources
 {
     public class UserProfileResource
     {      
@@ -23,5 +17,9 @@ namespace MamApi.Models.Resources
         public Department Department { get; set; }
 
         public Branch Branch { get; set; }
+
+        public GroupLevel GroupLevel { get; set; }
+
+        public string IMIE { get; set; }
     }
 }

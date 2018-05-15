@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MamApi.Data
 {
@@ -12,6 +16,14 @@ namespace MamApi.Data
 
         //IEnumerable<T> Query(Func<T, bool> criteria);   Not Work!!!  it gets all rows behind the scene
         IEnumerable<T> Query(Expression<Func<T, Boolean>> criteria);
+
+        TResult GetFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector,
+                                           Expression<Func<T, bool>> predicate = null,
+                                           Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                           Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+                                           bool disableTracking = true);
+
+        IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProps);
 
         T FindByKey(params object[] keyValues);
 
@@ -23,5 +35,9 @@ namespace MamApi.Data
         T Remove(T entity);
 
         void Commit();
+
+        IDbContextTransaction BeginTransaction();
+
+        Task<int> CommitAsync();
     }
 }

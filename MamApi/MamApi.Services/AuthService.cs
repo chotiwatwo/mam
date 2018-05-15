@@ -31,7 +31,10 @@ namespace MamApi.Services
             var user = _userRepo
                 .FindByInclude(
                     u => u.UserId == userName && u.Password == hashedPassword,
-                    i => i.Position, j => j.Department, k => k.Branch)
+                    u => u.Position, 
+                    u => u.Department, 
+                    u => u.Branch, 
+                    u => u.GroupLevel)
                 .FirstOrDefault();
 
             //if (user != null && user.Count() > 0)
@@ -71,11 +74,13 @@ namespace MamApi.Services
                     {
                         // new Claim(JwtRegisteredClaimNames.Sub, userName),
                         new Claim(JwtRegisteredClaimNames.Sub, userProfile.UserId),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Jti, userProfile.IMIE),
                         new Claim("userName", userProfile.UserName),
                         new Claim("positionId", userProfile.Position.Id),
                         new Claim("departmentId", userProfile.Department.Id),
-                        new Claim("branchId", userProfile.Branch.Id)
+                        new Claim("branchId", userProfile.Branch.Id),
+                        new Claim("groupLevelId", userProfile.GroupLevel.Id)
                     };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(privateKey));
@@ -85,7 +90,7 @@ namespace MamApi.Services
                 issuer: issuer,
                 audience: issuer,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(1),
+                expires: DateTime.UtcNow.AddHours(10),
                 signingCredentials: creds
             );
 
@@ -98,30 +103,65 @@ namespace MamApi.Services
             return tokenResult;
         }
 
-        public async Task<string> GetBranchIdFromUserProfile(HttpContext httpContext)
-        {
-            string branchId = await GetClaimValueFromToken(httpContext, "branchId");
-
-            return branchId ?? string.Empty;
-        }
-
-        private async Task<string> GetClaimValueFromToken(HttpContext httpContext, string claimType)
+        public async Task<UserProfile> GetUserProfileFromToken(HttpContext httpContext)
         {
             var accessToken = await AuthenticationHttpContextExtensions.GetTokenAsync(httpContext, "access_token");
 
-            var claimValue = GetClaimValue(accessToken, claimType);
-
-            return claimValue;
+            return GetUserProfileFromClaimValues(accessToken);
         }
 
-        private string GetClaimValue(string accessToken, string claimType)
+        private UserProfile GetUserProfileFromClaimValues(string accessToken)
         {
             var handler = new JwtSecurityTokenHandler();
 
             var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken;
 
-            return tokenS.Claims.First(claim => claim.Type == claimType).Value;
+            //return tokenS.Claims.First(claim => claim.Type == claimType);
+
+            UserProfile userProfile = new UserProfile()
+            {
+                UserId = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value,
+                IMEI = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value,
+                UserName = tokenS.Claims.First(claim => claim.Type == "userName").Value,
+                PositionId = tokenS.Claims.First(claim => claim.Type == "positionId").Value,
+                DepartmentId = tokenS.Claims.First(claim => claim.Type == "departmentId").Value,
+                BranchId = tokenS.Claims.First(claim => claim.Type == "branchId").Value,
+                GroupLevelId = tokenS.Claims.First(claim => claim.Type == "groupLevelId").Value
+            };
+
+            return userProfile;
         }
 
+        //public async Task<string> GetBranchIdFromUserProfile(HttpContext httpContext)
+        //{
+        //    string branchId = await GetClaimValueFromToken(httpContext, "branchId");
+
+        //    return branchId ?? string.Empty;
+        //}
+
+        //public async Task<string> GetUserIdFromUserProfile(HttpContext httpContext)
+        //{
+        //    string userId = await GetClaimValueFromToken(httpContext, JwtRegisteredClaimNames.Sub);
+
+        //    return userId ?? string.Empty;
+        //}
+
+        //private async Task<string> GetClaimValueFromToken(HttpContext httpContext, string claimType)
+        //{
+        //    var accessToken = await AuthenticationHttpContextExtensions.GetTokenAsync(httpContext, "access_token");
+
+        //    var claimValue = GetClaimValue(accessToken, claimType);
+
+        //    return claimValue;
+        //}
+
+        //private string GetClaimValue(string accessToken, string claimType)
+        //{
+        //    var handler = new JwtSecurityTokenHandler();
+
+        //    var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken;
+
+        //    return tokenS.Claims.First(claim => claim.Type == claimType).Value;
+        //}
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MamApi.Data.Repositories;
 using AutoMapper;
@@ -19,12 +19,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Serilog;
 
 namespace MamApi
 {
     public class Startup
     {
         private readonly IHostingEnvironment _env;
+
         private IConfiguration _configuration { get; }
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
@@ -47,7 +49,7 @@ namespace MamApi
             //    services.Configure<MvcOptions>(o =>
             //        o.Filters.Add(new RequireHttpsAttribute())
             //    );
-                                
+
             //}
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -82,7 +84,12 @@ namespace MamApi
 
             //services.AddCors();
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
             
         }
 

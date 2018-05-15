@@ -33,10 +33,15 @@ namespace MamApi.Models
         [Column("Customer_FNameTH")]
         public string FirstNameThai { get; set; }
 
+        [Column("Customer_MNameTH")]
+        public string MiddleNameThai { get; set; }
+
         [Column("Customer_LNameTH")]
         public string LastNameThai { get; set; }
 
-        //public Sex Sex { get; set; }
+        [Column("Customer_Sex")]
+        public string Sex { get; set; }
+
         [Column("Customer_CardType")]
         public string CardType { get; set; }
 
@@ -47,6 +52,15 @@ namespace MamApi.Models
         [Required]
         [Column("Customer_Status")]
         public string Status { get; set; }
-        
+
+        public ICollection<MktAddress> Addresses { get; set; }
+
+        [Column("Customer_CreateBy")]
+        public string CreatedBy { get; set; }
+
+        [Column("Customer_CreateDate")]
+        public DateTime? CreatedDate { get; set; }
+
+        public MktAsset Asset { get; set; }
     }
 }

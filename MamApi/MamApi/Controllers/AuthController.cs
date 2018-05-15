@@ -36,12 +36,18 @@ namespace MamApi.Controllers
         {
             try
             {
+                if (loginResource == null)
+                    return BadRequest("ข้อมูลในการ Login ไม่ถูกต้อง");
+
                 var user = _authService.CheckCredential(loginResource.Username, loginResource.Password);
 
                 if (user == null)
                     return NotFound("Username หรือ Password ไม่ถูกต้อง");
 
                 var userProfileResource = _mapper.Map<User, UserProfileResource>(user);
+
+                // ไว้ค่อย Check IMIE ใน DB อีกที
+                userProfileResource.IMIE = loginResource.IMEI;
 
                 var token = _authService.CreateToken(userProfileResource, 
                     _configuration["JWT:Issuer"],

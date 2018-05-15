@@ -31,21 +31,19 @@ namespace MamApi.Models
 
         [Column("User_PositionID")]
         public string PositionID { get; set; }
-
         public Position Position { get; set; }
 
         [Column("User_DepartmentID")]
         public string DepartmentId { get; set; }
-
         public Department Department { get; set; }
 
         [Column("User_BranchID")]
         public string BranchId { get; set; }
-
         public Branch Branch { get; set; }
 
-        
-
+        [Column("User_GroupLevelID")]
+        public string GroupLevelId { get; set; }
+        public GroupLevel GroupLevel { get; set; }
 
     }
 }

@@ -5,10 +5,11 @@ using MamApi.Models.Resources;
 using AutoMapper;
 using MamApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using Serilog;
 
 namespace MamApi.Controllers
 {
-    
     [Produces("application/json")]
     [Route("api/Apps")]
     public class AppsController : Controller
@@ -36,12 +37,23 @@ namespace MamApi.Controllers
             return Ok(apps);
         }
 
-        [HttpGet("{appNo}")]
-        public IActionResult GetApp(string appNo)
+        [Authorize]
+        [HttpGet("{appNo}", Name = "GetApp")]
+        public IActionResult GetApp(string appNo, bool toCheckNCB = false)
         {
             try
             {
-                var app = _appService.GetApp(appNo);
+                //Log.Information("This is {@appNo}", appNo);
+                MktApplication app;
+
+                if (!toCheckNCB)
+                {
+                    app = _appService.GetApp(appNo);
+                }
+                else
+                {
+                    app = _appService.GetAppToCheckNCB(appNo);
+                }
 
                 if (app == null)
                 {
@@ -51,30 +63,82 @@ namespace MamApi.Controllers
 
                 return Ok(app);
             }
-            catch
+            catch (Exception ex)
             {
-
-                
+                Log.Error("มี error {@Except}", ex);
             }
 
             return BadRequest();
         }
 
+        /* 
+            FromBody (json) => CreateAppResource
+            {
+                "AppId": "",
+                "CardType": "30",
+                "IDCardNo": "3101501514494",
+                "TitleId": "A1",
+                "FirstNameThai": "โชติวัติ",
+                "LastNameThai": "วงศ์ถา"
+            }
+        */
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateApp([FromBody] CreateAppResource app)
+        public async Task<IActionResult> CreateApp([FromBody] CreateAppResource createAppResource)
         {
-            string branchId = await _authService.GetBranchIdFromUserProfile(HttpContext);
+            try
+            {
+                //string branchId = await _authService.GetBranchIdFromUserProfile(HttpContext);
+                //string userId = await _authService.GetUserIdFromUserProfile(HttpContext);
 
-            var mktApp = _mapper.Map<CreateAppResource, MktApplication>(app);
+                Log.Information("From Body {@CreateAppResource}", createAppResource);
+                
+                UserProfile userProfile = await _authService.GetUserProfileFromToken(HttpContext);
 
-            var mktCustomer = _mapper.Map<CreateCustomerResource, MktCustomer>(app.Customer);
+                MktCustomer customer = new MktCustomer()
+                {
+                    CardType = createAppResource.CardType,
+                    IDCardNo = createAppResource.IDCardNo,
+                    NewOrOld = BusinessConstant.CustomerNewType,
+                    TitleId = createAppResource.TitleId,
+                    FirstNameThai = createAppResource.FirstNameThai,
+                    LastNameThai = createAppResource.LastNameThai
+                };
 
-            mktApp.Customer = mktCustomer;
+                MktApplicationExtend appExtend = new MktApplicationExtend()
+                {
+                    CurrentBy = userProfile.UserId,
+                    CurrentLevel = userProfile.GroupLevelId
+                };
 
-            var createdApp = _appService.CreateApp(mktApp);
+                MktApplication app = new MktApplication() {
+                    AppOwnerId = userProfile.UserId,
 
-            return Ok(createdApp);
+                    ApplicationExtend = appExtend,
+                    Customer = customer
+                    
+                };
+
+                var createdApp = await _appService.CreateApp(app, userProfile);
+
+                string newURI = Url.Link("GetApp", new { appNo = createdApp.AppId, toCheckNCB = true });
+
+                var resultApp = new { appNo = createdApp.AppId, url = newURI };
+
+                return Created(newURI, resultApp);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("This is {@Exception}", ex);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("created/{appNo}")]
+        public IActionResult GetCreatedApp(string appNo)
+        {
+            return Ok($"Get Created App : OK => { appNo }");
         }
 
         [HttpPut("{appNo}")]

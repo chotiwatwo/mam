@@ -1,5 +1,6 @@
 ﻿using MamApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MamApi.Services
 {
@@ -9,7 +10,9 @@ namespace MamApi.Services
 
         MktApplication GetApp(string appNo);
 
-        MktApplication CreateApp(MktApplication app);
+        MktApplication GetAppToCheckNCB(string appNo);
+
+        Task<MktApplication> CreateApp(MktApplication app, UserProfile userProfile);
 
         void UpdateApp();
 

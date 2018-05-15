@@ -15,6 +15,12 @@ namespace MamApi.Mapping
         {
             // Domain to API Resource 
             CreateMap<MasterInfo, MasterInfoResource>();
+
+            CreateMap<Province, ProvinceResource>();
+
+            CreateMap<Amphur, AmphurResource>();
+
+            CreateMap<District, DistrictResource>();
         }
     }
 }

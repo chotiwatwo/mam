@@ -14,6 +14,10 @@ namespace MamApi.Services
 
         object CreateToken(UserProfileResource userProfile, string issuer, string privateKey);
 
-        Task<string> GetBranchIdFromUserProfile(HttpContext httpContext);
+        //Task<string> GetBranchIdFromUserProfile(HttpContext httpContext);
+
+        //Task<string> GetUserIdFromUserProfile(HttpContext httpContext);
+
+        Task<UserProfile> GetUserProfileFromToken(HttpContext httpContext);
     }
 }

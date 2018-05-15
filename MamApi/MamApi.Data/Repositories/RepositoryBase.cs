@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MamApi.Data
 {
@@ -42,80 +45,6 @@ namespace MamApi.Data
 
         #region Regular Member
 
-        //public string ExecSP(string sqlStatement) {
-
-        //    using (var command = _context.Database.GetDbConnection().CreateCommand())
-        //    {
-        //        string maxAppId = string.Empty;
-
-        //        command.CommandText = "dbo.[Sp_C_MKT_Application_GetMax_MKT_ApplicationID]";
-        //        command.CommandType = CommandType.StoredProcedure;
-
-        //        command.Parameters.Add(
-        //            new SqlParameter()
-        //            {
-        //                ParameterName = "@User_UserID",
-        //                SqlDbType = SqlDbType.VarChar,
-        //                Direction = System.Data.ParameterDirection.Input,
-        //                Value = sqlStatement
-        //            }
-        //        );
-
-        //        command.Parameters.Add(
-        //            new SqlParameter()
-        //            {
-        //                ParameterName = "@iErrorCode",
-        //                SqlDbType = SqlDbType.Int,
-        //                Direction = System.Data.ParameterDirection.Output
-        //            }
-        //        );
-
-        //        if (command.Connection.State != ConnectionState.Open)
-        //        {
-        //            command.Connection.Open();
-        //        }
-
-        //        //_context.Database.OpenConnection();
-        //        var result = command.ExecuteReader();
-                
-        //        // do something with result
-        //        if (result.HasRows)
-        //        {
-        //            while (result.Read())
-        //            {
-        //                maxAppId = result.GetString(0);
-        //            }
-        //        }
-
-        //        result.Close();
-
-        //        return maxAppId;
-        //    }
-            
-        //    /*
-        //    SqlParameter[] SqlParams = {
-        //        new SqlParameter() {
-        //            ParameterName = "@User_UserID",
-        //            SqlDbType = SqlDbType.VarChar,
-        //            Direction = System.Data.ParameterDirection.Input,
-        //            Value = sqlStatement
-        //        },
-
-        //        new SqlParameter() {
-        //            ParameterName = "@iErrorCode",
-        //            SqlDbType = SqlDbType.Int,
-        //            Direction = System.Data.ParameterDirection.Output
-        //        }
-        //    };
-
-        //    int res = _context.Database.ExecuteSqlCommand("exec dbo.[Sp_C_MKT_Application_GetMax_MKT_ApplicationID] @User_UserID, @iErrorCode", SqlParams);
-
-
-        //    string maxApp = SqlParams[1].ToString();
-        //    */
-        //    //return maxApp;
-        //}
-
         public IList<T> GetAll()
         {
             return this.DbSet.Take(100).ToList();
@@ -132,13 +61,13 @@ namespace MamApi.Data
 
         public IEnumerable<T> FindByInclude(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProps) {
             var query = GetAllIncluding(includeProps);
-
+            
             IEnumerable<T> results = query.Where(predicate).ToList();
 
             return results;
         }
 
-        private IQueryable<T> GetAllIncluding
+        public IQueryable<T> GetAllIncluding
         (params Expression<Func<T, object>>[] includeProps)
         {
             IQueryable<T> queryable = this.DbSet;
@@ -156,14 +85,66 @@ namespace MamApi.Data
             return this.DbSet.Remove(entity).Entity;
         }
 
+        public IDbContextTransaction BeginTransaction()
+        {
+            return _context.Database.BeginTransaction();
+        }
+
         public void Commit()
         {
             _context.SaveChanges();
         }
 
+        public async Task<int> CommitAsync()
+        {
+             return await _context.SaveChangesAsync();
+        }
+
         public DbSet<T> GetDbSet()
         {
             return this.DbSet;
+        }
+
+        /// <summary>
+        /// Gets the first or default entity based on a predicate, orderby delegate and include delegate. This method default no-tracking query.
+        /// </summary>
+        /// <param name="selector">The selector for projection.</param>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        /// <param name="orderBy">A function to order elements.</param>
+        /// <param name="include">A function to include navigation properties</param>
+        /// <param name="disableTracking"><c>True</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+        /// <returns>An <see cref="IPagedList{TEntity}"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
+        /// <remarks>This method default no-tracking query.</remarks>
+        public TResult GetFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector,
+                                                  Expression<Func<T, bool>> predicate = null,
+                                                  Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                                  Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+                                                  bool disableTracking = true)
+        {
+            IQueryable<T> query = _dbSet;
+            if (disableTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).Select(selector).FirstOrDefault();
+            }
+            else
+            {
+                return query.Select(selector).FirstOrDefault();
+            }
         }
 
         #endregion
