@@ -11,6 +11,6 @@ namespace MamApi.Data.Repositories
 
         long InsertApplicationLog(ApplicationLog appLog, IDbContextTransaction contextTransaction);
 
-        MktApplication GetShortApp(string appNo);
+        MktApplication GetShortApp(string appId);
     }
 }

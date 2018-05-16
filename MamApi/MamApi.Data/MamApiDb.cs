@@ -28,6 +28,7 @@ namespace MamApi.Data
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Amphur> Amphurs { get; set; }
         public DbSet<District> Districts { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
 
         public MamApiDb(DbContextOptions<MamApiDb> options) : base(options)
         {
@@ -63,6 +64,11 @@ namespace MamApi.Data
             modelBuilder
                 .Entity<MktAnnotation>()
                 .ToTable("MKT_Annotation");
+
+            modelBuilder
+                .Entity<Attachment>()
+                .ToTable("Attachment")
+                .HasKey(a => new { a.Id, a.AppId, a.CustomerId });
 
             #endregion <<< MKT Application >>>
 

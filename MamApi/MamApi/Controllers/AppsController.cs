@@ -38,8 +38,8 @@ namespace MamApi.Controllers
         }
 
         [Authorize]
-        [HttpGet("{appNo}", Name = "GetApp")]
-        public IActionResult GetApp(string appNo, bool toCheckNCB = false)
+        [HttpGet("{appId}", Name = "GetApp")]
+        public IActionResult GetApp(string appId, bool toCheckNCB = false)
         {
             try
             {
@@ -48,20 +48,22 @@ namespace MamApi.Controllers
 
                 if (!toCheckNCB)
                 {
-                    app = _appService.GetApp(appNo);
+                    app = _appService.GetApp(appId);
                 }
                 else
                 {
-                    app = _appService.GetAppToCheckNCB(appNo);
+                    app = _appService.GetAppToCheckNCB(appId);
                 }
 
                 if (app == null)
                 {
                     //return NotFound($"Application No : [{ appNo }] was not found");
-                    return NotFound($"ไม่พบเลขที่ใบคำขอ : [{ appNo }] ในระบบ");
+                    return NotFound($"ไม่พบเลขที่ใบคำขอ : [{ appId }] ในระบบ");
                 }
 
-                return Ok(app);
+                var checkNCBAppResource = _mapper.Map<MktApplication, CheckNCBAppResource>(app);
+
+                return Ok(new { checkNcbApp = checkNCBAppResource, fullApp = app });
             }
             catch (Exception ex)
             {
@@ -135,14 +137,8 @@ namespace MamApi.Controllers
             return BadRequest();
         }
 
-        [HttpGet("created/{appNo}")]
-        public IActionResult GetCreatedApp(string appNo)
-        {
-            return Ok($"Get Created App : OK => { appNo }");
-        }
-
-        [HttpPut("{appNo}")]
-        public IActionResult UpdateApp(string appNo)
+        [HttpPut("{appId}")]
+        public IActionResult UpdateApp(string appId)
         {
             //var updatedApp = _repo.FindByKey(appNo);
 
@@ -156,8 +152,8 @@ namespace MamApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{appNo}")]
-        public IActionResult DeleteApp(string appNo)
+        [HttpDelete("{appId}")]
+        public IActionResult DeleteApp(string appId)
         {
             //var deletedApp = _repo.FindByKey(appNo);
 

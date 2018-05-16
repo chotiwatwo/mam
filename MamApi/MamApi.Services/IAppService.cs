@@ -8,9 +8,9 @@ namespace MamApi.Services
     {
         IEnumerable<MktApplication> GetApps();
 
-        MktApplication GetApp(string appNo);
+        MktApplication GetApp(string appId);
 
-        MktApplication GetAppToCheckNCB(string appNo);
+        MktApplication GetAppToCheckNCB(string appId);
 
         Task<MktApplication> CreateApp(MktApplication app, UserProfile userProfile);
 

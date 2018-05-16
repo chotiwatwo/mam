@@ -15,14 +15,14 @@ namespace MamApi.Models.Resources
         
         [Required]
         public string CardType { get; set; }
-        public string CardTypeDesc { get; set; }
+        //public string CardTypeDesc { get; set; }
 
         [Required]
         public string IDCardNo { get; set; }
 
         [Required]
         public string TitleId { get; set; }
-        public string TitleName { get; set; }
+        //public string TitleName { get; set; }
 
         [Required]
         public string FirstNameThai { get; set; }
@@ -30,26 +30,60 @@ namespace MamApi.Models.Resources
         [Required]
         public string LastNameThai { get; set; }
 
-        public string Sex { get; set; }
-        public string SexDesc { get; set; }
+        [Required]
+        public string SexId { get; set; }
+        //public string SexDesc { get; set; }
 
+        [Required]
         public DateTime BirthDate { get; set; }
 
-        public MktAddress MailingAddress { get; set; }
+        //public MktAddress MailingAddress { get; set; }
+        // ที่อยู่จัดส่งเอกสาร
+        // รหัสทะเบียนบ้าน
+        public string MailingAddressCode { get; set; }
+
+        // บ้านเลขที่
+        [Required]
+        public string MailingHouseNo { get; set; }
+
+        public string MailingFloor { get; set; }
+
+        public string MailingRoomNo { get; set; }
+
+        public string MailingMoo { get; set; }
+
+        public string MailingSoi { get; set; }
+
+        public string MailingRoad { get; set; }
+
+        [Required]
+        public short MailingProvinceId { get; set; }
+
+        [Required]
+        public long MailingAmphurId { get; set; }
+
+        [Required]
+        public long MailingDistrictId { get; set; }
+
+        [Required]
+        public string MailingZipCode { get; set; }
+
+        public string MailingApartment { get; set; }
 
         public string LoanType { get; set; }
-        public string LoanTypeDesc { get; set; }
+        //public string LoanTypeDesc { get; set; }
 
         public string NewOrOldCar { get; set; }
 
         public string PopularBrand { get; set; }
-        public string PopularBrandDesc { get; set; }
+        //public string PopularBrandDesc { get; set; }
 
         public string CarAgeLessThanOrEqual10Years { get; set; }
-        public string CarAgeLessThanOrEqual10YearsDesc { get; set; }
+        //public string CarAgeLessThanOrEqual10YearsDesc { get; set; }
 
         public string GroupOccupationType { get; set; }
-        public string GroupOccupationTypeDesc { get; set; }
+        //public string GroupOccupationTypeDesc { get; set; }
 
+        public ICollection<AttachmentResource> Attachments { get; set; }
     }
 }

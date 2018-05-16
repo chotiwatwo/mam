@@ -121,12 +121,11 @@ namespace MamApi.Services
             return app;
         }
 
-        public MktApplication GetApp(string appNo)
+        public MktApplication GetApp(string appId)
         {
-            //var app = _appRepo.FindByKey(appNo);
             var app = _appRepo
                         .FindByInclude(
-                            a => a.AppId == appNo,
+                            a => a.AppId == appId,
                             a => a.ApplicationExtend,
                             a => a.Annotation,
                             a => a.Customer)
@@ -135,15 +134,9 @@ namespace MamApi.Services
             return app;
         }
 
-        public MktApplication GetAppToCheckNCB(string appNo)
+        public MktApplication GetAppToCheckNCB(string appId)
         {
-            //var appToCheckNCB = _appRepo
-            //                      .FindByInclude(
-            //                          a => a.AppId == appNo,
-            //                          a => a.Customer)
-            //                      .FirstOrDefault();
-
-            var appToCheckNCB = _appRepo.GetShortApp(appNo);
+            var appToCheckNCB = _appRepo.GetShortApp(appId);
 
             return appToCheckNCB;
         }
@@ -151,8 +144,8 @@ namespace MamApi.Services
         public IEnumerable<MktApplication> GetApps()
         {
             var apps = _appRepo.FindByInclude(
-                a => a.AppId.StartsWith("0161"), 
-                b => b.Branch);
+                            a => a.AppId.StartsWith("0161"), 
+                            b => b.Branch);
 
             return apps;
         }

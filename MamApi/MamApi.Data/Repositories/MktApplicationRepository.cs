@@ -308,10 +308,10 @@ namespace MamApi.Data
 
         }
 
-        public MktApplication GetShortApp(string appNo)
+        public MktApplication GetShortApp(string appId)
         {
             MktApplication app = _context.MktApplications
-                                     .Where(a => a.AppId == appNo)
+                                     .Where(a => a.AppId == appId)
 
                                      .Include(a => a.Customer)
                                      .ThenInclude(c => c.Addresses)
