@@ -29,6 +29,7 @@ namespace MamApi.Data
         public DbSet<Amphur> Amphurs { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<Parameter> Parameters { get; set; }
 
         public MamApiDb(DbContextOptions<MamApiDb> options) : base(options)
         {
@@ -157,7 +158,9 @@ namespace MamApi.Data
                 .Entity<GroupLevel>()
                 .ToTable("GroupLevel");
 
-            
+            modelBuilder
+                .Entity<Parameter>()
+                .ToTable("Parameter");
         }
     }
 }

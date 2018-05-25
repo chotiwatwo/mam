@@ -57,12 +57,15 @@ namespace MamApi.Models.Resources
         public string MailingRoad { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "โปรดเลือกจังหวัด")]
         public short MailingProvinceId { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "โปรดเลือกอำเภอ")]
         public long MailingAmphurId { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "โปรดเลือกตำบล")]
         public long MailingDistrictId { get; set; }
 
         [Required]
@@ -70,20 +73,26 @@ namespace MamApi.Models.Resources
 
         public string MailingApartment { get; set; }
 
+        [Required]
         public string LoanType { get; set; }
         //public string LoanTypeDesc { get; set; }
 
+        [Required]
         public string NewOrOldCar { get; set; }
 
+        [Required]
         public string PopularBrand { get; set; }
         //public string PopularBrandDesc { get; set; }
 
+        [Required]
         public string CarAgeLessThanOrEqual10Years { get; set; }
         //public string CarAgeLessThanOrEqual10YearsDesc { get; set; }
 
+        [Required]
         public string GroupOccupationType { get; set; }
         //public string GroupOccupationTypeDesc { get; set; }
 
+        [Required]
         public ICollection<AttachmentResource> Attachments { get; set; }
     }
 }

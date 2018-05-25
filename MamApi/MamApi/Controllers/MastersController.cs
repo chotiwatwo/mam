@@ -27,6 +27,15 @@ namespace MamApi.Controllers
             _mapper = mapper;
         }
 
+        private IEnumerable<MasterInfoResource> GetMasterInfoResource(string infoType)
+        {
+            var MasterInfos = _service.GetMasterInfosByType(infoType, "A");
+
+            var MasterInfoResources = _mapper.Map<IEnumerable<MasterInfo>, IEnumerable<MasterInfoResource>>(MasterInfos);
+
+            return MasterInfoResources;
+        }
+
         [HttpGet("card-types")]
         public IActionResult GetCardTypes() {
             var CardTypes = _service.GetMasterInfosByType("IDType", "A");
@@ -43,12 +52,161 @@ namespace MamApi.Controllers
         [HttpGet("titles")]
         public IActionResult GetTitles()
         {
-            var Titles = _service.GetMasterInfosByType("Title", "A");
+            var MasterInfoResources = GetMasterInfoResource("Title");
 
-            var TitlesResource = _mapper.Map<IEnumerable<MasterInfo>, IEnumerable<MasterInfoResource>>(Titles);
-
-            return Ok(TitlesResource);
+            return Ok(MasterInfoResources);
         }
+
+        // ประเภทเอกสาร (สำหรับ Attach)
+        [HttpGet("attachment-types")]
+        public IActionResult GetAttachmentTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("AttachmentType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // เชื้อชาติ
+        [HttpGet("races")]
+        public IActionResult GetRaces()
+        {
+            var MasterInfoResources = GetMasterInfoResource("Race");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // สัญชาติ / ประเทศถิ่นพำนัก / ประเทศแหล่งเงินได้
+        [HttpGet("nationalities")]
+        public IActionResult GetNationalities()
+        {
+            var MasterInfoResources = GetMasterInfoResource("Nationality");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ศาสนา
+        [HttpGet("religious")]
+        public IActionResult GetReligious()
+        {
+            var MasterInfoResources = GetMasterInfoResource("Religious");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // วุฒิการศึกษา
+        [HttpGet("education-types")]
+        public IActionResult GetEducationTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("EducationType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // สถานภาพการสมรส
+        [HttpGet("married-status")]
+        public IActionResult GetMarriedStatus()
+        {
+            var MasterInfoResources = GetMasterInfoResource("MarriedStatus");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ภาระรับผิดชอบ
+        [HttpGet("responsibilities")]
+        public IActionResult GetResponsibilities()
+        {
+            var MasterInfoResources = GetMasterInfoResource("Responsibility");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ประเภทโทรศัพท์
+        [HttpGet("telephone-types")]
+        public IActionResult GetTelephoneTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("TelephoneType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ประเภทอีเมลล์
+        [HttpGet("email-types")]
+        public IActionResult GetEmailTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("EmailType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // สถานะในที่อยู่อาศัย 
+        [HttpGet("living-status")]
+        public IActionResult GetLivingStatus()
+        {
+            var MasterInfoResources = GetMasterInfoResource("LivingStatus");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // กรรมสิทธิ์ในสิ่งปลูกสร้าง
+        [HttpGet("house-ownerships")]
+        public IActionResult GetHouseOwnerships()
+        {
+            var MasterInfoResources = GetMasterInfoResource("HouseOwnership");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // สถานภาพการจ้างงาน
+        [HttpGet("hire-status")]
+        public IActionResult GetHireStatusCodes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("HireStatusCode");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ขนาดกิจการ
+        [HttpGet("company-sizes")]
+        public IActionResult GetCompanySizeCodes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("CompanySizeCode");
+
+            return Ok(MasterInfoResources);
+        }
+
+        [HttpGet("business-sectors")]
+        public IActionResult GetBusinessSectors()
+        {
+            var MasterInfoResources = GetMasterInfoResource("BusinessSector");
+
+            return Ok(MasterInfoResources);
+        }
+
+        //[HttpGet("")]
+        //public IActionResult Get()
+        //{
+        //    var MasterInfoResources = GetMasterInfoResource("");
+
+        //    return Ok(MasterInfoResources);
+        //}
+
+        //[HttpGet("")]
+        //public IActionResult Get()
+        //{
+        //    var MasterInfoResources = GetMasterInfoResource("");
+
+        //    return Ok(MasterInfoResources);
+        //}
+
+        //[HttpGet("")]
+        //public IActionResult Get()
+        //{
+        //    var MasterInfoResources = GetMasterInfoResource("");
+
+        //    return Ok(MasterInfoResources);
+        //}
+
+        // 
 
         [HttpGet("loan-types")]
         public IActionResult GetLoanTypes()

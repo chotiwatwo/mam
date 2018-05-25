@@ -26,7 +26,10 @@ namespace MamApi.Models
         public long? CCCreditChkId { get; set; }
 
         [Column("Attachment_Type")]
-        public string Type { get; set; }
+        public string AttachmentType { get; set; }
+
+        // แสดงชื่อ Description ของประเภทการแนบ เช่น C = 'Consent'
+        public string AttachmentTypeName { get; set; }
 
         [Column("Attachment_Name")]
         public string Name { get; set; }
@@ -51,5 +54,8 @@ namespace MamApi.Models
 
         [Column("Attachment_UpdateDate")]
         public DateTime? UpdateDate { get; set; }
+
+        // สำหรับแสดงผล Path ของ File ที่ Upload ไปแล้ว  (ex. //files.cal.co.th:8888/CreditChecking/0161000001/xxx.jpg)
+        public string DisplayFilePath { get; set; } 
     }
 }

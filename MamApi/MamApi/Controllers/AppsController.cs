@@ -10,6 +10,7 @@ using Serilog;
 
 namespace MamApi.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/Apps")]
     public class AppsController : Controller
@@ -37,7 +38,6 @@ namespace MamApi.Controllers
             return Ok(apps);
         }
 
-        [Authorize]
         [HttpGet("{appId}", Name = "GetApp")]
         public IActionResult GetApp(string appId, bool toCheckNCB = false)
         {
@@ -63,7 +63,9 @@ namespace MamApi.Controllers
 
                 var checkNCBAppResource = _mapper.Map<MktApplication, CheckNCBAppResource>(app);
 
-                return Ok(new { checkNcbApp = checkNCBAppResource, fullApp = app });
+                //return Ok(new { checkNcbApp = checkNCBAppResource, fullApp = app });
+
+                return Ok(new { checkNcbApp = checkNCBAppResource });
             }
             catch (Exception ex)
             {
@@ -84,12 +86,14 @@ namespace MamApi.Controllers
                 "LastNameThai": "วงศ์ถา"
             }
         */
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateApp([FromBody] CreateAppResource createAppResource)
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
                 //string branchId = await _authService.GetBranchIdFromUserProfile(HttpContext);
                 //string userId = await _authService.GetUserIdFromUserProfile(HttpContext);
 
@@ -123,14 +127,39 @@ namespace MamApi.Controllers
 
                 var createdApp = await _appService.CreateApp(app, userProfile);
 
-                string newURI = Url.Link("GetApp", new { appNo = createdApp.AppId, toCheckNCB = true });
+                string newURI = Url.Link("GetApp", new { appId = createdApp.AppId, toCheckNCB = true });
 
-                var resultApp = new { appNo = createdApp.AppId, url = newURI };
+                var resultApp = new { appId = createdApp.AppId, url = newURI };
 
                 return Created(newURI, resultApp);
             }
             catch (Exception ex)
             {
+                Log.Error("This is {@Exception}", ex);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost("{appId}/creditchecking")]
+        public async Task<IActionResult> SubmitToCreditChecking(string appId, 
+            [FromBody] CheckNCBAppResource checkNCBApp)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                // 1) Validate 
+
+                // 2) Save
+
+
+                return Ok(checkNCBApp);
+            }
+            catch (Exception ex)
+            {
+
                 Log.Error("This is {@Exception}", ex);
             }
 

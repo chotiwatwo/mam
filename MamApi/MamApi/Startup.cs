@@ -69,6 +69,8 @@ namespace MamApi
 
             services.AddAutoMapper();
 
+            services.AddSingleton(_configuration);
+
             services.AddDbContext<MamApiDb>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("MAMDb")));
 
@@ -76,11 +78,13 @@ namespace MamApi
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAppService, AppService>();
             services.AddScoped<IMasterService, MasterService>();
+            services.AddScoped<IFileAttachmentService, FileAttachmentService>();
 
             // Register MAM Repository
             services.AddTransient<IAppRepository, MktApplicationRepository>();
             services.AddTransient<IMasterRepository, MasterRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IParameterRepository, ParameterRepository>();
 
             //services.AddCors();
 
