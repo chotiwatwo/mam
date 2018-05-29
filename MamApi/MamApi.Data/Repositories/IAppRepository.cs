@@ -12,5 +12,11 @@ namespace MamApi.Data.Repositories
         long InsertApplicationLog(ApplicationLog appLog, IDbContextTransaction contextTransaction);
 
         MktApplication GetShortApp(string appId);
+
+        MktApplication GetFullApp(string appId);
+
+        int UpdateApplicationCurrentCarId(long currentCarId, string appId, IDbContextTransaction contextTransaction);
+
+        int UpdateFastTrack(string appId, IDbContextTransaction contextTransaction);
     }
 }

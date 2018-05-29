@@ -14,6 +14,8 @@ namespace MamApi.Services
 
         Task<MktApplication> CreateApp(MktApplication app, UserProfile userProfile);
 
+        Task<MktApplication> SaveAppBeforeSubmitToCreditChecking(MktApplication app, UserProfile userProfile);
+
         void UpdateApp();
 
         void RejectApp();

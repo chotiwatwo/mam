@@ -22,3 +22,6 @@ Start working on Submit to check NCB process
 2018-05-25
 Finish Uploading Attachment Files to check NCB 
 Start working Lookup Master files 
+
+2018-05-29
+Working On Submit to Credit Checking (Finish Save App. before submitting)

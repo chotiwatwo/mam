@@ -16,7 +16,9 @@ namespace MamApi.Data
 
         public DbSet<MktApplication> MktApplications { get; set; }
         public DbSet<MktApplicationExtend> MktApplicationExtends { get; set; }
+        public DbSet<MktLoanType> MktLoanTypes { get; set; }
         public DbSet<MktCustomer> MktCustomers { get; set; }
+        public DbSet<MktCar> MktCars { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<MasterInfo> MasterInfos { get; set; }
         public DbSet<User> Users { get; set; }
@@ -58,6 +60,16 @@ namespace MamApi.Data
                 .WithOne()
                 .HasForeignKey<MktAnnotation>(b => b.AppId);
 
+            appEntity
+                .HasOne(a => a.LoanType)
+                .WithOne()
+                .HasForeignKey<MktLoanType>(l => l.AppId);
+
+            appEntity
+                .HasOne(a => a.Car)
+                .WithOne()
+                .HasForeignKey<MktCar>(c => c.AppId);
+
             modelBuilder
                 .Entity<MktApplicationExtend>()
                 .ToTable("MKT_ApplicationExtend");
@@ -70,6 +82,15 @@ namespace MamApi.Data
                 .Entity<Attachment>()
                 .ToTable("Attachment")
                 .HasKey(a => new { a.Id, a.AppId, a.CustomerId });
+
+            modelBuilder
+                .Entity<MktLoanType>()
+                .ToTable("MKT_LoanType")
+                .HasKey(l => new { l.Id, l.AppId });
+
+            modelBuilder
+                .Entity<MktCar>()
+                .ToTable("MKT_Car");
 
             #endregion <<< MKT Application >>>
 

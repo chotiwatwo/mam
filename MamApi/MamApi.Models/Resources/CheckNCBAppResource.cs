@@ -93,6 +93,6 @@ namespace MamApi.Models.Resources
         //public string GroupOccupationTypeDesc { get; set; }
 
         [Required]
-        public ICollection<AttachmentResource> Attachments { get; set; }
+        public ICollection<AttachmentUploadResource> Attachments { get; set; }
     }
 }

@@ -18,14 +18,14 @@ namespace MamApi.Services
             _masterService = masterService;
         }
 
-        public void CancelApp()
+        private string GetCustomerSexFromTitle(string titleId)
         {
-            
-        }
+            var _customerSex = _masterService
+                                 .GetMasterInfosByIdAndType(titleId, "Title", "A")
+                                 .Select(m => m.MappingValidate)
+                                 .SingleOrDefault();
 
-        public void Commit()
-        {
-
+            return _customerSex;
         }
 
         public async Task<MktApplication> CreateApp(MktApplication app, UserProfile userProfile)
@@ -121,15 +121,34 @@ namespace MamApi.Services
             return app;
         }
 
+        public async Task<MktApplication> SaveAppBeforeSubmitToCreditChecking(MktApplication app, UserProfile userProfile)
+        {
+            using (var transaction = _appRepo.BeginTransaction())
+            {
+                await _appRepo.CommitAsync();
+
+                _appRepo.UpdateApplicationCurrentCarId(app.Car.Id, app.AppId, transaction);
+
+                // FastTrack เป็น 0 เพราะยังไม่ได้เลือก [อาชีพ]
+                _appRepo.UpdateFastTrack(app.AppId, transaction);
+
+                transaction.Commit();
+            }
+
+            return app;
+        }
+
         public MktApplication GetApp(string appId)
         {
-            var app = _appRepo
-                        .FindByInclude(
-                            a => a.AppId == appId,
-                            a => a.ApplicationExtend,
-                            a => a.Annotation,
-                            a => a.Customer)
-                        .FirstOrDefault();
+            //var app = _appRepo
+            //            .FindByInclude(
+            //                a => a.AppId == appId,
+            //                a => a.ApplicationExtend,
+            //                a => a.Annotation,
+            //                a => a.Customer)
+            //            .FirstOrDefault();
+
+            var app = _appRepo.GetFullApp(appId);
 
             return app;
         }
@@ -150,23 +169,26 @@ namespace MamApi.Services
             return apps;
         }
 
-        public void RejectApp()
-        {
-
-        }
-
         public void UpdateApp()
         {
 
         }
 
-        private string GetCustomerSexFromTitle(string titleId) {
-            var _customerSex = _masterService
-                                 .GetMasterInfosByIdAndType(titleId, "Title", "A")
-                                 .Select(m => m.MappingValidate)
-                                 .SingleOrDefault();
+        public void RejectApp()
+        {
 
-            return _customerSex;
         }
+
+        public void CancelApp()
+        {
+
+        }
+
+        public void Commit()
+        {
+
+        }
+
+        
     }
 }

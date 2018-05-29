@@ -16,7 +16,7 @@ namespace MamApi.Models.Resources
 
         public long? CCCreditChkId { get; set; }
 
-        public string Type { get; set; }
+        public string AttachmentType { get; set; }
 
         public string Name { get; set; }
 

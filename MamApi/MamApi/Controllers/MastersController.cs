@@ -174,6 +174,7 @@ namespace MamApi.Controllers
             return Ok(MasterInfoResources);
         }
 
+        // Business Sector
         [HttpGet("business-sectors")]
         public IActionResult GetBusinessSectors()
         {
@@ -182,32 +183,93 @@ namespace MamApi.Controllers
             return Ok(MasterInfoResources);
         }
 
-        //[HttpGet("")]
-        //public IActionResult Get()
+        // Channel
+        [HttpGet("channels")]
+        public IActionResult GetChannels()
+        {
+            var MasterInfoResources = GetMasterInfoResource("Channel");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // สีรถ
+        [HttpGet("car-colors")]
+        public IActionResult GetCarColorCodes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("CarColorCode");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ประเภทเกียร์
+        [HttpGet("gear-types")]
+        public IActionResult GetGearTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("GearType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // เชื้อเพลิง
+        [HttpGet("fuel-types")]
+        public IActionResult GetFuelTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("FuelType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        // ประเภทรถ
+        [HttpGet("car-types")]
+        public IActionResult GetCarTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("CarType");
+
+            return Ok(MasterInfoResources);
+        }
+
+        //// ประเภทจดทะเบียน
+        //[HttpGet("register-types")]
+        //public IActionResult GetRegisterTypes()
         //{
-        //    var MasterInfoResources = GetMasterInfoResource("");
+        //    var MasterInfoResources = GetMasterInfoResource("RegisterType");
 
         //    return Ok(MasterInfoResources);
         //}
 
-        //[HttpGet("")]
-        //public IActionResult Get()
-        //{
-        //    var MasterInfoResources = GetMasterInfoResource("");
+        // ประเภทรูปรถ  (Constant in HPCS source code)
 
-        //    return Ok(MasterInfoResources);
-        //}
+        // VAT รถใช้แล้ว (มี VAT / ไม่มี VAT)
+        [HttpGet("vat-options")]
+        public IActionResult GetVatOptions()
+        {
+            var MasterInfoResources = GetMasterInfoResource("Vat");
 
-        //[HttpGet("")]
-        //public IActionResult Get()
-        //{
-        //    var MasterInfoResources = GetMasterInfoResource("");
+            return Ok(MasterInfoResources);
+        }
 
-        //    return Ok(MasterInfoResources);
-        //}
+        // Customer Campaign (Table [MS_Campaign].Campaign_Type == 'C')
 
-        // 
+        // ประเภทบริษัท (คำนำหน้า บริษัท)
 
+        // Top-up Type
+        [HttpGet("topup-types")]
+        public IActionResult GetTopUpTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("InsuranceAmountType");
+
+            return Ok(MasterInfoResources);
+        }
+        
+        // Top-up Pay Type 
+        [HttpGet("topup-paytypes")]
+        public IActionResult GetTopUpPayTypes()
+        {
+            var MasterInfoResources = GetMasterInfoResource("InsuranceTotalType");
+
+            return Ok(MasterInfoResources);
+        }
+        
         [HttpGet("loan-types")]
         public IActionResult GetLoanTypes()
         {
@@ -277,5 +339,13 @@ namespace MamApi.Controllers
 
             return Ok(districtsResource);
         }
+
+        //[HttpGet("car-brands")]
+        //public IActionResult GetCarBrands()
+        //{
+        //    var MasterInfoResources = GetMasterInfoResource("");
+
+        //    return Ok(MasterInfoResources);
+        //}
     }
 }

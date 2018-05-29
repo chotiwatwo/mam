@@ -24,6 +24,9 @@ namespace MamApi.Models
         [Column("Customer_NewOldType")]
         public string NewOrOld { get; set; }
 
+        [Column("Customer_SpouseID")]
+        public int? SpouseId { get; set; }
+
         [Column("Customer_Type")]
         public string CustomerType { get; set; }
 
@@ -38,6 +41,32 @@ namespace MamApi.Models
 
         [Column("Customer_LNameTH")]
         public string LastNameThai { get; set; }
+
+        [Column("Customer_FNameEN")]
+        public string FirstNameEng { get; set; }
+
+        [Column("Customer_MNameEN")]
+        public string MiddleNameEng { get; set; }
+
+        [Column("Customer_LNameEN")]
+        public string LastNameEng { get; set; }
+
+        [Column("Customer_BirthDate")]
+        public DateTime? BirthDate { get; set; }
+
+        [Column("Customer_Age")]
+        public byte? Age { get; set; }
+
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
+        //[Column("")]
 
         [Column("Customer_Sex")]
         public string Sex { get; set; }
@@ -62,5 +91,7 @@ namespace MamApi.Models
         public DateTime? CreatedDate { get; set; }
 
         public MktAsset Asset { get; set; }
+
+  
     }
 }

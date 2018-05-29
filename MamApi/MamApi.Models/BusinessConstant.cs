@@ -11,6 +11,8 @@ namespace MamApi.Models
         // General
         public const string StatusActive = "A";
         public const string FlagYes = "Y";
+        public const string NonSelectedDropDownIndex = "0";
+
 
         // MKT_Customer
         public const string CustomerNewType = "N";  // ลูกค้าใหม่
@@ -26,5 +28,31 @@ namespace MamApi.Models
         // MKT_Application
         public const string AppStatusMarketingInitial = "P";   // MKT.บันทึกคำขอสินเชื่อเบื้องต้น
 
+        // Attachment Type
+        public const string AttachmentTypeConsent = "C";               // Consent
+        public const string AttachmentTypeFrontApplicationForm = "F";  // คำเสนอขอเช่าซื้อ ด้านหน้า
+        public const string AttachmentTypeIndividual = "I";            // บัตรประชาชน
+        public const string AttachmentTypeMemoInternal = "O";          // Memo Internal
+        public const string AttachmentTypeConsentModel = "T";          // Consent Model
+
+        public enum AddressType
+        {
+            // เวลา Save ลง MKT_Address.MKT_Address_ID จะเป็นตามนี้
+            //1	Address
+            //2	Current
+            //3	Debt
+            //4	Document
+            //5	Office
+            //6	Other
+            //7	Person
+
+            Address,
+            Current,
+            Debt,
+            Document,
+            Office,
+            Other,
+            Person
+        }
     }
 }

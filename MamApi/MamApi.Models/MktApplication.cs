@@ -19,7 +19,6 @@ namespace MamApi.Models
         public Branch Branch { get; set; }
 
         //public string MKT_Application_ContractNo { get; set; }
-        //public long? MKT_Application_CurrentCarID { get; set; }
         //public string MKT_Application_ActiveContract_AppID { get; set; }
         //public string MKT_Application_DealerID { get; set; }
 
@@ -42,6 +41,13 @@ namespace MamApi.Models
         public MktApplicationExtend ApplicationExtend { get; set; }
 
         public MktAnnotation Annotation { get; set; }
+
+        public MktLoanType LoanType { get; set; }
+
+        public MktCar Car { get; set; }
+
+        [Column("MKT_Application_CurrentCarID")]
+        public long? CurrentCarID { get; set; }
 
         [Column("MKT_Application_CreateBy")]
         public string CreatedBy { get; set; }

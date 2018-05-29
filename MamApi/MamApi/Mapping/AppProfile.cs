@@ -34,7 +34,25 @@ namespace MamApi.Mapping
                 .ForMember(chk => chk.SexId,
                     opt => opt.MapFrom(a => a.Customer.Sex));
 
+            // API Resource to Domain
+            //CreateMap<CheckNCBAppResource, MktApplication>()
+            //    .ForMember(a => a.Customer.NewOrOld,
+            //        opt => opt.MapFrom(chk => chk.NewOrOldCustomer))
+            //    .ForMember(a => a.Customer.CardType,
+            //        opt => opt.MapFrom(chk => chk.CardType))
+            //    .ForMember(a => a.Customer.IDCardNo,
+            //        opt => opt.MapFrom(chk => chk.IDCardNo))
+            //    .ForMember(a => a.Customer.TitleId,
+            //        opt => opt.MapFrom(chk => chk.TitleId))
+            //    .ForMember(a => a.Customer.FirstNameThai,
+            //        opt => opt.MapFrom(chk => chk.FirstNameThai))
+            //    .ForMember(a => a.Customer.LastNameThai,
+            //        opt => opt.MapFrom(chk => chk.LastNameThai))
+            //    .ForMember(a => a.Customer.Sex,
+            //        opt => opt.MapFrom(chk => chk.SexId));
 
+                //.ForMember(a => a.Customer.Addresses,
+                //    opt => opt.ResolveUsing())
         }
     }
 }

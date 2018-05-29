@@ -20,4 +20,16 @@ namespace MamApi.Models.Resources
 
         public string DisplayFilePath { get; set; }
     }
+
+    /* 
+        {
+            "appId": "9961000102",
+            "customerId": 383790,
+            "attachmentType": "F",
+            "attachmentTypeName": "คำเสนอขอเช่าซื้อ ด้านหน้า",
+            "name": "9961000102_383790_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg",
+            "displayFilePath": "//files.cal.co.th:8888/CreditChecking/9961000102/9961000102_383790_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg"
+        }
+     
+     */
 }

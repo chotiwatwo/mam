@@ -308,6 +308,95 @@ namespace MamApi.Data
 
         }
 
+        public int UpdateApplicationCurrentCarId(long currentCarId, string appId, 
+            IDbContextTransaction contextTransaction)
+        {
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.Transaction = contextTransaction.GetDbTransaction();
+                command.CommandText = "dbo.[Sp_C_MKT_Car_UpdateCurrentCarID]";
+                command.CommandType = CommandType.StoredProcedure;
+
+                /* 
+                    exec dbo.[Sp_C_MKT_Car_UpdateCurrentCarID] @sCar_ID=221878,@sCar_AppID='0161003086',@iErrorCode=@p3 output 
+                */
+
+                command.Parameters.Add(
+                    new SqlParameter("@sCar_ID", SqlDbType.BigInt, 8)
+                    {
+                        IsNullable = false,
+                        Value = currentCarId
+                    });
+
+                command.Parameters.Add(
+                    new SqlParameter("@sCar_AppID", SqlDbType.VarChar, 10)
+                    {
+                        IsNullable = false,
+                        Value = appId
+                    });
+
+                SqlParameter outputParam_ErrorCode = new SqlParameter("@iErrorCode", SqlDbType.Int, 4)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                command.Parameters.Add(outputParam_ErrorCode);
+
+                if (command.Connection.State != ConnectionState.Open)
+                {
+                    command.Connection.Open();
+                }
+
+                // Execute query.
+                int _rowsAffected = command.ExecuteNonQuery();
+
+                int _errorCode = Convert.ToInt32(command.Parameters["@iErrorCode"].Value.ToString());
+
+                return _errorCode;
+            }
+
+        }
+
+        public int UpdateFastTrack(string appId, IDbContextTransaction contextTransaction)
+        {
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.Transaction = contextTransaction.GetDbTransaction();
+                command.CommandText = "dbo.[Sp_C_MKT_Application_UpdateFastTrack]";
+                command.CommandType = CommandType.StoredProcedure;
+
+                /*
+                   exec dbo.[Sp_C_MKT_Application_UpdateFastTrack] @sAppNo='0161003086',@iErrorCode=@p2 output
+                */
+
+                command.Parameters.Add(
+                    new SqlParameter("@sAppNo", SqlDbType.VarChar, 10)
+                    {
+                        IsNullable = false,
+                        Value = appId
+                    });
+
+                SqlParameter outputParam_ErrorCode = new SqlParameter("@iErrorCode", SqlDbType.Int, 4)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                command.Parameters.Add(outputParam_ErrorCode);
+
+                if (command.Connection.State != ConnectionState.Open)
+                {
+                    command.Connection.Open();
+                }
+
+                // Execute query.
+                int _rowsAffected = command.ExecuteNonQuery();
+
+                int _errorCode = Convert.ToInt32(command.Parameters["@iErrorCode"].Value.ToString());
+
+                return _errorCode;
+            }
+        }
+
         public MktApplication GetShortApp(string appId)
         {
             MktApplication app = _context.MktApplications
@@ -317,6 +406,31 @@ namespace MamApi.Data
                                      .ThenInclude(c => c.Addresses)
                                      .ThenInclude(ad => ad.District)
                                      .ThenInclude(dt => dt.Amphur)
+                                     //.ThenInclude(am => am.Province)
+
+                                     //.Include(a => a.Customer)
+                                     //.ThenInclude(c => c.Addresses)
+                                     //.ThenInclude(ad => ad.Amphur)
+
+                                     .SingleOrDefault();
+
+            return app;
+        }
+
+        public MktApplication GetFullApp(string appId)
+        {
+            MktApplication app = _context.MktApplications
+                                     .Where(a => a.AppId == appId)
+                                     .Include(a => a.ApplicationExtend)
+                                     .Include(a => a.Annotation)
+                                     .Include(a => a.ApplicationExtend)
+                                     .Include(a => a.LoanType)
+                                     .Include(a => a.Car)
+
+                                     .Include(a => a.Customer)
+                                     .ThenInclude(c => c.Addresses)
+                                     //.ThenInclude(ad => ad.District)
+                                     //.ThenInclude(dt => dt.Amphur)
                                      //.ThenInclude(am => am.Province)
 
                                      //.Include(a => a.Customer)
