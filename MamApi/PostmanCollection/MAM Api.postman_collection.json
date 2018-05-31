@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"userName\": \"ST12511\",\n\t\"password\": \"1234C@l\",\n\t\"IMEI\": \"123456789012345\"\n}"
+							"raw": "{\n\t\"userName\": \"ST12511\",\n\t\"password\": \"1234C@l\",\n\t\"IMEI\": \"123456789012345\",\n\t\"firebaseToken\": \"abcdefghijklmnopqrstuvwxyz\"\n}"
 						},
 						"url": {
 							"raw": "http://mam.cimbthaiauto.com/api/auth/login",
@@ -161,6 +161,16 @@
 				{
 					"name": "Get Created Application",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -169,7 +179,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -177,7 +188,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://mam.cimbthaiauto.com/api/apps/:appNo?toCheckNCB=True",
+							"raw": "http://mam.cimbthaiauto.com/api/apps/:appId?toCheckNCB=True",
 							"protocol": "http",
 							"host": [
 								"mam",
@@ -187,7 +198,7 @@
 							"path": [
 								"api",
 								"apps",
-								":appNo"
+								":appId"
 							],
 							"query": [
 								{
@@ -197,8 +208,8 @@
 							],
 							"variable": [
 								{
-									"key": "appNo",
-									"value": "0161003060"
+									"key": "appId",
+									"value": "0161003210"
 								}
 							]
 						}
@@ -208,6 +219,16 @@
 				{
 					"name": "Get Application",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -216,7 +237,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -224,7 +246,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://mam.cimbthaiauto.com/api/Apps/:appNo",
+							"raw": "http://mam.cimbthaiauto.com/api/Apps/:appId",
 							"protocol": "http",
 							"host": [
 								"mam",
@@ -234,12 +256,12 @@
 							"path": [
 								"api",
 								"Apps",
-								":appNo"
+								":appId"
 							],
 							"variable": [
 								{
-									"key": "appNo",
-									"value": "0161003060"
+									"key": "appId",
+									"value": "0161003210"
 								}
 							]
 						}
@@ -249,6 +271,16 @@
 				{
 					"name": "Get Provinces",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -257,7 +289,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -284,6 +317,16 @@
 				{
 					"name": "Get Amphurs of Province",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -292,7 +335,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -327,6 +371,16 @@
 				{
 					"name": "Get District (Tambon) of Amphur",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -335,7 +389,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -370,6 +425,16 @@
 				{
 					"name": "Get Loan Types",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -378,7 +443,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {},
@@ -402,6 +468,16 @@
 				{
 					"name": "Get Popular Brand Options",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -410,7 +486,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {},
@@ -434,6 +511,16 @@
 				{
 					"name": "Get Car Age Options",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -442,7 +529,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {},
@@ -466,6 +554,16 @@
 				{
 					"name": "Get Group Occupation Options",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -474,7 +572,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
 							}
 						],
 						"body": {},
@@ -492,6 +591,1078 @@
 								"group-occupation-options"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Attachment Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/attachment-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"attachment-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Files for Credit Checking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "appId",
+									"value": "9961000999",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "customerId",
+									"value": "383790",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "attachmentType",
+									"value": "C",
+									"description": "ex. C,I,F,O,T etc.  (api [Get Attachment Types] http://mam.cimbthaiauto.com/api/masters/attachment-types)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/files/creditcheck/upload",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"files",
+								"creditcheck",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit to  Credit Checking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJNQzE1NzQ0IiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKHguJnguLHguI3guIrguKLguLIg4LiK4LmJ4Liy4LiH4Lii4Li34LiZ4Lii4LiHIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIxNSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMjAiLCJleHAiOjE1MjcxODI3NzMsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.MW0FuBB5bui6O0biSZUKERSeWKncPX8KT6Jwq2TUjp4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"appId\": \"0161003082\",\n    \"newOrOldCustomer\": \"O\",\n    \"cardType\": \"30\",\n    \"idCardNo\": \"3961100322180\",\n    \"titleId\": \"2\",\n    \"firstNameThai\": \"Zoo\",\n    \"lastNameThai\": \"Chi\",\n    \"sexId\": \"24\",\n    \"birthDate\": \"1976-08-01T00:00:00\",\n    \"mailingAddressCode\": null,\n    \"mailingHouseNo\": \"10/30\",\n    \"mailingFloor\":\"ชั้น 2\",\n    \"mailingRoomNo\":\"B2 220\",\n    \"mailingMoo\": null,\n    \"mailingSoi\":\"พัฒนาการ 26\",\n    \"mailingRoad\":\"พัฒนาการ\",\n    \"mailingProvinceId\": 1,\n    \"mailingAmphurId\": 1015,\n    \"mailingDistrictId\": 84,\n    \"mailingZipCode\": \"10600\",\n    \"mailingApartment\": null,\n    \"loanType\": \"B\",\n    \"newOrOldCar\": \"N\",\n    \"popularBrand\": \"1\",\n    \"carAgeLessThanOrEqual10Years\": \"1\",\n    \"groupOccupationType\": \"02\",\n    \"attachments\": \n     [\n    \t{\n\t\t    \"appId\": \"0161003082\",\n\t\t    \"customerId\": 404512,\n\t\t    \"attachmentType\": \"C\",\n\t\t    \"attachmentTypeName\": \"Consent\",\n\t\t    \"name\": \"0161003082_404512_Consent.jpg\",\n\t\t    \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_Consent.jpg\"\n\t\t},\n    \t\n    \t{\n\t\t    \"appId\": \"0161003082\",\n\t\t    \"customerId\": 404512,\n\t\t    \"attachmentType\": \"I\",\n\t\t    \"attachmentTypeName\": \"บัตรประชาชน\",\n\t\t    \"name\": \"0161003082_404512_บัตรประชาชน.jpg\",\n\t\t    \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_บัตรประชาชน.jpg\"\n\t\t},    \t\n    \t\n    \t{\n\t\t    \"appId\": \"0161003082\",\n\t\t    \"customerId\": 404512,\n\t\t    \"attachmentType\": \"F\",\n\t\t    \"attachmentTypeName\": \"คำเสนอขอเช่าซื้อ ด้านหน้า\",\n\t\t    \"name\": \"0161003082_404512_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg\",\n\t\t    \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg\"\n\t\t},\n\t\t\n    \t{\n\t\t    \"appId\": \"0161003082\",\n\t\t    \"customerId\": 404512,\n\t\t    \"attachmentType\": \"O\",\n\t\t    \"attachmentTypeName\": \"Consent Model\",\n\t\t    \"name\": \"0161003082_404512_Consent Model.jpg\",\n\t\t    \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_Consent Model.jpg\"\n\t\t}\t\t\n     ]\n}"
+						},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/apps/:appId/creditchecking",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"apps",
+								":appId",
+								"creditchecking"
+							],
+							"variable": [
+								{
+									"key": "appId",
+									"value": "0161003082"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lookup Master Data",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Races",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/races",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"races"
+							]
+						},
+						"description": "เชื้อชาติ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Nationalities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/nationalities",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"nationalities"
+							]
+						},
+						"description": "สัญชาติ / ประเทศถิ่นพำนัก / ประเทศแหล่งเงินได้"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Religious",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/religious",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"religious"
+							]
+						},
+						"description": "ศาสนา"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Education Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/education-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"education-types"
+							]
+						},
+						"description": "วุฒิการศึกษา"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Married Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/married-status",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"married-status"
+							]
+						},
+						"description": "สถานภาพการสมรส"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Responsibilities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/responsibilities",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"responsibilities"
+							]
+						},
+						"description": "ภาระรับผิดชอบ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Telephone Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/telephone-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"telephone-types"
+							]
+						},
+						"description": "ประเภทโทรศัพท์"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Email Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/email-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"email-types"
+							]
+						},
+						"description": "ประเภทอีเมลล์"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Living Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/living-status",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"living-status"
+							]
+						},
+						"description": "สถานะในที่อยู่อาศัย"
+					},
+					"response": []
+				},
+				{
+					"name": "Get House Ownerships",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/house-ownerships",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"house-ownerships"
+							]
+						},
+						"description": "กรรมสิทธิ์ในสิ่งปลูกสร้าง"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hire Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/hire-status",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"hire-status"
+							]
+						},
+						"description": "สถานภาพการจ้างงาน"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company Sizes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/company-sizes",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"company-sizes"
+							]
+						},
+						"description": "ขนาดกิจการ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Business Sectors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/business-sectors",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"business-sectors"
+							]
+						},
+						"description": "Business Sector"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Channels",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/channels",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"channels"
+							]
+						},
+						"description": "Channel"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Car Colors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/car-colors",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"car-colors"
+							]
+						},
+						"description": "สีรถ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Gear Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/gear-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"gear-types"
+							]
+						},
+						"description": "ประเภทเกียร์"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Fuel Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/fuel-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"fuel-types"
+							]
+						},
+						"description": " เชื้อเพลิง"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Car Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/car-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"car-types"
+							]
+						},
+						"description": "ประเภทรถ"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vat Options",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/vat-options",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"vat-options"
+							]
+						},
+						"description": "VAT รถใช้แล้ว (มี VAT / ไม่มี VAT)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Topup Types",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/topup-types",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"topup-types"
+							]
+						},
+						"description": "Top-up Type"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Topup Paytypes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1Mjc3NzU4MjEsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.NoqB6UcNPozNUOTqJTNghMHQpKUIcaVVlOl9rGA9wjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTVDEyNTExIiwianRpIjoiMTIzNDU2Nzg5MDEyMzQ1IiwidXNlck5hbWUiOiLguJnguLLguIfguKrguLLguKfguKrguLTguKPguLTguJfguLTguJ7guKLguYwg4LiX4Li04Lie4Lii4LmA4LiB4Lip4LijIiwicG9zaXRpb25JZCI6IlBPUzAwMDAwMDQiLCJkZXBhcnRtZW50SWQiOiJERVBUMDAwMDAyIiwiYnJhbmNoSWQiOiIwMSIsImdyb3VwTGV2ZWxJZCI6IkdMMDAwMDAwMDEiLCJleHAiOjE1MjYzOTEzOTUsImlzcyI6Im1hbS5jaW1idGhhaWF1dG8uY29tIiwiYXVkIjoibWFtLmNpbWJ0aGFpYXV0by5jb20ifQ.WlXiNYJ6Wn1cmvtHiOhvIyH2M58G1Nj28kLnimIu6e4",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://mam.cimbthaiauto.com/api/masters/topup-paytypes",
+							"protocol": "http",
+							"host": [
+								"mam",
+								"cimbthaiauto",
+								"com"
+							],
+							"path": [
+								"api",
+								"masters",
+								"topup-paytypes"
+							]
+						},
+						"description": "Topup Paytypes"
 					},
 					"response": []
 				}

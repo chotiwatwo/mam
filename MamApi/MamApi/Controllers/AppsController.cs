@@ -28,6 +28,7 @@ namespace MamApi.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet("test")]
         public IActionResult test() {
             return Ok("Yes");
@@ -40,13 +41,13 @@ namespace MamApi.Controllers
             return Ok(apps);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet("{appId}", Name = "GetApp")]
         public IActionResult GetApp(string appId, bool toCheckNCB = false)
         {
             try
             {
-                //Log.Information("This is {@appNo}", appNo);
+                Log.Information("This is {@appId}", appId);
                 MktApplication app;
 
                 if (!toCheckNCB)
@@ -274,6 +275,149 @@ namespace MamApi.Controllers
             return car;
         }
 
+        private MktCustomer UpdateCustomerBeforeSubmitToCreditChecking(string appId, string userId,
+            CheckNCBAppResource checkNCBApp, MktCustomer customer)
+        {
+            customer.NewOrOld = checkNCBApp.NewOrOldCustomer;
+            customer.CardType = checkNCBApp.CardType;
+            customer.IDCardNo = checkNCBApp.IDCardNo;
+            customer.TitleId = checkNCBApp.TitleId;
+            customer.FirstNameThai = checkNCBApp.FirstNameThai;
+            customer.LastNameThai = checkNCBApp.LastNameThai;
+            customer.Sex = checkNCBApp.SexId;
+            customer.BirthDate = checkNCBApp.BirthDate;
+
+            if ((customer.Addresses == null) || customer.Addresses.Count == 0)
+            {
+                customer.Addresses = new MktAddress[]
+                {
+                        new MktAddress
+                        {
+                            Id = 1,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Address.ToString(),
+                            HouseNo = string.Empty,
+                            Floor = string.Empty,
+                            RoomNo = string.Empty,
+                            Moo = string.Empty,
+                            Soi = string.Empty,
+                            Road = string.Empty,
+                            DistrictId = 0,
+                            AmphurId = 0,
+                            ProvinceId = 0,
+                            Status = BusinessConstant.StatusActive
+                        },
+
+                        new MktAddress
+                        {
+                            Id = 2,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Current.ToString(),
+                            HouseNo = string.Empty,
+                            Floor = string.Empty,
+                            RoomNo = string.Empty,
+                            Moo = string.Empty,
+                            Soi = string.Empty,
+                            Road = string.Empty,
+                            DistrictId = 0,
+                            AmphurId = 0,
+                            ProvinceId = 0,
+                            Status = BusinessConstant.StatusActive
+                        },
+
+                        new MktAddress
+                        {
+                            Id = 3,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Debt.ToString(),
+                            HouseNo = string.Empty,
+                            Floor = string.Empty,
+                            RoomNo = string.Empty,
+                            Moo = string.Empty,
+                            Soi = string.Empty,
+                            Road = string.Empty,
+                            DistrictId = 0,
+                            AmphurId = 0,
+                            ProvinceId = 0,
+                            Status = BusinessConstant.StatusActive
+                        },
+
+                        new MktAddress
+                        {
+                            Id = 4,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Document.ToString(),
+                            AddressCode = checkNCBApp.MailingAddressCode ?? string.Empty,
+                            HouseNo = checkNCBApp.MailingHouseNo,
+                            Floor = checkNCBApp.MailingFloor ?? string.Empty,
+                            RoomNo = checkNCBApp.MailingRoomNo ?? string.Empty,
+                            Moo = checkNCBApp.MailingMoo ?? string.Empty,
+                            Soi = checkNCBApp.MailingSoi ?? string.Empty,
+                            Road = checkNCBApp.MailingRoad ?? string.Empty,
+                            DistrictId = checkNCBApp.MailingDistrictId,
+                            AmphurId = checkNCBApp.MailingAmphurId,
+                            ProvinceId = checkNCBApp.MailingProvinceId,
+                            ZipCode = checkNCBApp.MailingZipCode,
+                            Status = BusinessConstant.StatusActive
+                        },
+
+                        new MktAddress
+                        {
+                            Id = 5,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Office.ToString(),
+                            HouseNo = string.Empty,
+                            Floor = string.Empty,
+                            RoomNo = string.Empty,
+                            Moo = string.Empty,
+                            Soi = string.Empty,
+                            Road = string.Empty,
+                            DistrictId = 0,
+                            AmphurId = 0,
+                            ProvinceId = 0,
+                            Status = BusinessConstant.StatusActive
+                        },
+
+                        new MktAddress
+                        {
+                            Id = 6,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Other.ToString(),
+                            HouseNo = string.Empty,
+                            Floor = string.Empty,
+                            RoomNo = string.Empty,
+                            Moo = string.Empty,
+                            Soi = string.Empty,
+                            Road = string.Empty,
+                            DistrictId = 0,
+                            AmphurId = 0,
+                            ProvinceId = 0,
+                            Status = BusinessConstant.StatusActive
+                        },
+
+                        new MktAddress
+                        {
+                            Id = 7,
+                            CustomerId = customer.Id, //app.Customer.Id,
+                            AddressType = BusinessConstant.AddressType.Person.ToString(),
+                            HouseNo = string.Empty,
+                            Floor = string.Empty,
+                            RoomNo = string.Empty,
+                            Moo = string.Empty,
+                            Soi = string.Empty,
+                            Road = string.Empty,
+                            DistrictId = 0,
+                            AmphurId = 0,
+                            ProvinceId = 0,
+                            Status = BusinessConstant.StatusActive
+                        }
+                };
+
+            }
+
+            return customer;
+        }
+
         [HttpPost("{appId}/creditchecking")]
         public async Task<IActionResult> SubmitToCreditChecking(string appId, 
             [FromBody] CheckNCBAppResource checkNCBApp)
@@ -308,6 +452,9 @@ namespace MamApi.Controllers
 
                 app.Car = UpdateCarBeforeSubmitToCreditChecking(appId, userProfile.UserId, checkNCBApp, 
                     app.Car);
+
+                app.Customer = UpdateCustomerBeforeSubmitToCreditChecking(appId, userProfile.UserId, checkNCBApp,
+                    app.Customer);
 
                 //if (app.LoanType == null)
                 //{
@@ -355,141 +502,141 @@ namespace MamApi.Controllers
 
                 //app.Car.OldNewCar = checkNCBApp.NewOrOldCar;
 
-                app.Customer.NewOrOld = checkNCBApp.NewOrOldCustomer;
-                app.Customer.CardType = checkNCBApp.CardType;
-                app.Customer.IDCardNo = checkNCBApp.IDCardNo;
-                app.Customer.TitleId = checkNCBApp.TitleId;
-                app.Customer.FirstNameThai = checkNCBApp.FirstNameThai;
-                app.Customer.LastNameThai = checkNCBApp.LastNameThai;
-                app.Customer.Sex = checkNCBApp.SexId;
-                app.Customer.BirthDate = checkNCBApp.BirthDate;
+                //app.Customer.NewOrOld = checkNCBApp.NewOrOldCustomer;
+                //app.Customer.CardType = checkNCBApp.CardType;
+                //app.Customer.IDCardNo = checkNCBApp.IDCardNo;
+                //app.Customer.TitleId = checkNCBApp.TitleId;
+                //app.Customer.FirstNameThai = checkNCBApp.FirstNameThai;
+                //app.Customer.LastNameThai = checkNCBApp.LastNameThai;
+                //app.Customer.Sex = checkNCBApp.SexId;
+                //app.Customer.BirthDate = checkNCBApp.BirthDate;
 
-                if ((app.Customer.Addresses == null) || app.Customer.Addresses.Count == 0)
-                {
-                    app.Customer.Addresses = new MktAddress[]
-                    {
-                        new MktAddress
-                        {
-                            Id = 1,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Address.ToString(),
-                            HouseNo = string.Empty,
-                            Floor = string.Empty,
-                            RoomNo = string.Empty,
-                            Moo = string.Empty,
-                            Soi = string.Empty,
-                            Road = string.Empty,
-                            DistrictId = 0,
-                            AmphurId = 0,
-                            ProvinceId = 0,
-                            Status = BusinessConstant.StatusActive
-                        },
+                //if ((app.Customer.Addresses == null) || app.Customer.Addresses.Count == 0)
+                //{
+                //    app.Customer.Addresses = new MktAddress[]
+                //    {
+                //        new MktAddress
+                //        {
+                //            Id = 1,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Address.ToString(),
+                //            HouseNo = string.Empty,
+                //            Floor = string.Empty,
+                //            RoomNo = string.Empty,
+                //            Moo = string.Empty,
+                //            Soi = string.Empty,
+                //            Road = string.Empty,
+                //            DistrictId = 0,
+                //            AmphurId = 0,
+                //            ProvinceId = 0,
+                //            Status = BusinessConstant.StatusActive
+                //        },
 
-                        new MktAddress
-                        {
-                            Id = 2,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Current.ToString(),
-                            HouseNo = string.Empty,
-                            Floor = string.Empty,
-                            RoomNo = string.Empty,
-                            Moo = string.Empty,
-                            Soi = string.Empty,
-                            Road = string.Empty,
-                            DistrictId = 0,
-                            AmphurId = 0,
-                            ProvinceId = 0,
-                            Status = BusinessConstant.StatusActive
-                        },
+                //        new MktAddress
+                //        {
+                //            Id = 2,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Current.ToString(),
+                //            HouseNo = string.Empty,
+                //            Floor = string.Empty,
+                //            RoomNo = string.Empty,
+                //            Moo = string.Empty,
+                //            Soi = string.Empty,
+                //            Road = string.Empty,
+                //            DistrictId = 0,
+                //            AmphurId = 0,
+                //            ProvinceId = 0,
+                //            Status = BusinessConstant.StatusActive
+                //        },
 
-                        new MktAddress
-                        {
-                            Id = 3,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Debt.ToString(),
-                            HouseNo = string.Empty,
-                            Floor = string.Empty,
-                            RoomNo = string.Empty,
-                            Moo = string.Empty,
-                            Soi = string.Empty,
-                            Road = string.Empty,
-                            DistrictId = 0,
-                            AmphurId = 0,
-                            ProvinceId = 0,
-                            Status = BusinessConstant.StatusActive
-                        },
+                //        new MktAddress
+                //        {
+                //            Id = 3,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Debt.ToString(),
+                //            HouseNo = string.Empty,
+                //            Floor = string.Empty,
+                //            RoomNo = string.Empty,
+                //            Moo = string.Empty,
+                //            Soi = string.Empty,
+                //            Road = string.Empty,
+                //            DistrictId = 0,
+                //            AmphurId = 0,
+                //            ProvinceId = 0,
+                //            Status = BusinessConstant.StatusActive
+                //        },
 
-                        new MktAddress
-                        {
-                            Id = 4,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Document.ToString(),
-                            AddressCode = checkNCBApp.MailingAddressCode ?? string.Empty,
-                            HouseNo = checkNCBApp.MailingHouseNo,
-                            Floor = checkNCBApp.MailingFloor ?? string.Empty,
-                            RoomNo = checkNCBApp.MailingRoomNo ?? string.Empty,
-                            Moo = checkNCBApp.MailingMoo ?? string.Empty,
-                            Soi = checkNCBApp.MailingSoi ?? string.Empty,
-                            Road = checkNCBApp.MailingRoad ?? string.Empty,
-                            DistrictId = checkNCBApp.MailingDistrictId,
-                            AmphurId = checkNCBApp.MailingAmphurId,
-                            ProvinceId = checkNCBApp.MailingProvinceId,
-                            ZipCode = checkNCBApp.MailingZipCode,
-                            Status = BusinessConstant.StatusActive
-                        },
+                //        new MktAddress
+                //        {
+                //            Id = 4,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Document.ToString(),
+                //            AddressCode = checkNCBApp.MailingAddressCode ?? string.Empty,
+                //            HouseNo = checkNCBApp.MailingHouseNo,
+                //            Floor = checkNCBApp.MailingFloor ?? string.Empty,
+                //            RoomNo = checkNCBApp.MailingRoomNo ?? string.Empty,
+                //            Moo = checkNCBApp.MailingMoo ?? string.Empty,
+                //            Soi = checkNCBApp.MailingSoi ?? string.Empty,
+                //            Road = checkNCBApp.MailingRoad ?? string.Empty,
+                //            DistrictId = checkNCBApp.MailingDistrictId,
+                //            AmphurId = checkNCBApp.MailingAmphurId,
+                //            ProvinceId = checkNCBApp.MailingProvinceId,
+                //            ZipCode = checkNCBApp.MailingZipCode,
+                //            Status = BusinessConstant.StatusActive
+                //        },
 
-                        new MktAddress
-                        {
-                            Id = 5,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Office.ToString(),
-                            HouseNo = string.Empty,
-                            Floor = string.Empty,
-                            RoomNo = string.Empty,
-                            Moo = string.Empty,
-                            Soi = string.Empty,
-                            Road = string.Empty,
-                            DistrictId = 0,
-                            AmphurId = 0,
-                            ProvinceId = 0,
-                            Status = BusinessConstant.StatusActive
-                        },
+                //        new MktAddress
+                //        {
+                //            Id = 5,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Office.ToString(),
+                //            HouseNo = string.Empty,
+                //            Floor = string.Empty,
+                //            RoomNo = string.Empty,
+                //            Moo = string.Empty,
+                //            Soi = string.Empty,
+                //            Road = string.Empty,
+                //            DistrictId = 0,
+                //            AmphurId = 0,
+                //            ProvinceId = 0,
+                //            Status = BusinessConstant.StatusActive
+                //        },
 
-                        new MktAddress
-                        {
-                            Id = 6,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Other.ToString(),
-                            HouseNo = string.Empty,
-                            Floor = string.Empty,
-                            RoomNo = string.Empty,
-                            Moo = string.Empty,
-                            Soi = string.Empty,
-                            Road = string.Empty,
-                            DistrictId = 0,
-                            AmphurId = 0,
-                            ProvinceId = 0,
-                            Status = BusinessConstant.StatusActive
-                        },
+                //        new MktAddress
+                //        {
+                //            Id = 6,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Other.ToString(),
+                //            HouseNo = string.Empty,
+                //            Floor = string.Empty,
+                //            RoomNo = string.Empty,
+                //            Moo = string.Empty,
+                //            Soi = string.Empty,
+                //            Road = string.Empty,
+                //            DistrictId = 0,
+                //            AmphurId = 0,
+                //            ProvinceId = 0,
+                //            Status = BusinessConstant.StatusActive
+                //        },
 
-                        new MktAddress
-                        {
-                            Id = 7,
-                            CustomerId = app.Customer.Id,
-                            AddressType = BusinessConstant.AddressType.Person.ToString(),
-                            HouseNo = string.Empty,
-                            Floor = string.Empty,
-                            RoomNo = string.Empty,
-                            Moo = string.Empty,
-                            Soi = string.Empty,
-                            Road = string.Empty,
-                            DistrictId = 0,
-                            AmphurId = 0,
-                            ProvinceId = 0,
-                            Status = BusinessConstant.StatusActive
-                        }
-                    };
-                }
+                //        new MktAddress
+                //        {
+                //            Id = 7,
+                //            CustomerId = app.Customer.Id,
+                //            AddressType = BusinessConstant.AddressType.Person.ToString(),
+                //            HouseNo = string.Empty,
+                //            Floor = string.Empty,
+                //            RoomNo = string.Empty,
+                //            Moo = string.Empty,
+                //            Soi = string.Empty,
+                //            Road = string.Empty,
+                //            DistrictId = 0,
+                //            AmphurId = 0,
+                //            ProvinceId = 0,
+                //            Status = BusinessConstant.StatusActive
+                //        }
+                //    };
+                //}
 
                 var updatedApp = _appService.SaveAppBeforeSubmitToCreditChecking(app, userProfile);
 

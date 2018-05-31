@@ -25,3 +25,6 @@ Start working Lookup Master files
 
 2018-05-29
 Working On Submit to Credit Checking (Finish Save App. before submitting)
+
+2018-05-31
+Deploy Web Api V.2 to Vendor

@@ -59,7 +59,7 @@ namespace MamApi.Services
 
         public string GetDisplayCreditCheckingFilePath(string attachmentPath, string appId, string fileName)
         {
-            string CreditCheckingDir = Path.GetDirectoryName(attachmentPath).Split("\\").Last();
+            string CreditCheckingDir = Path.GetDirectoryName(attachmentPath).Split('\\').Last();
 
             string displayCreditCheckingFilePath = Path.Combine(
                 GetFullFilePathToViewFromConfigurationFile(),

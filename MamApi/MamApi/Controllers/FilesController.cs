@@ -7,12 +7,15 @@ using MamApi.Data.Repositories;
 using MamApi.Models;
 using MamApi.Models.Resources;
 using MamApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace MamApi.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/files")]
     public class FilesController : Controller
@@ -148,13 +151,25 @@ namespace MamApi.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            // สร้าง object สำหรับ return กลับไป ที่ client เพื่อใช้ส่งกลับมาอีกครั้งเพื่อ update ข้อมูล Attachment ลง Database
-            string displayFilePath = _fileAttachmentService.GetDisplayCreditCheckingFilePath
-                (
-                    attachmentPath,
-                    attachmentInfo.AppId,
-                    fileName
-                );
+            Log.Information("GetDisplayCreditCheckingFilePath attachmentPath : {@attachmentPath} , " +
+                "AppId : {@attachmentInfo.AppId} , " +
+                "fileName : {@fileName} ", attachmentPath, attachmentInfo.AppId, fileName);
+
+            string displayFilePath = string.Empty;
+            try
+            {
+                // สร้าง object สำหรับ return กลับไป ที่ client เพื่อใช้ส่งกลับมาอีกครั้งเพื่อ update ข้อมูล Attachment ลง Database
+                displayFilePath = _fileAttachmentService.GetDisplayCreditCheckingFilePath
+                    (
+                        attachmentPath,
+                        attachmentInfo.AppId,
+                        fileName
+                    );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in GetDisplayCreditCheckingFilePath : {@ex} ", ex);
+            }
 
             AttachmentUploadResource uploadAttach = new AttachmentUploadResource
             {
@@ -163,7 +178,7 @@ namespace MamApi.Controllers
                 AttachmentType = attachmentInfo.AttachmentType,
                 AttachmentTypeName = attachmentInfo.AttachmentTypeName,
                 Name = fileName,
-                DisplayFilePath = displayFilePath
+                DisplayFilePath = displayFilePath  // !!! Error but upload completed 
             };
 
             return Ok(uploadAttach);
