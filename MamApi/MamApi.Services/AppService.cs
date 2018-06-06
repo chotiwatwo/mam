@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MamApi.Data.Repositories;
 using MamApi.Models;
+using MamApi.Models.Resources;
 
 namespace MamApi.Services
 {
@@ -11,11 +12,17 @@ namespace MamApi.Services
     {
         private readonly IAppRepository _appRepo;
         private readonly IMasterService _masterService;
+        private readonly IAttachmentRepository _attachmentRepo;
+        private readonly ICreditCheckingRepository _creditCheckingRepo;
 
-        public AppService(IAppRepository appRepo, IMasterService masterService)
+        public AppService(IAppRepository appRepo, IMasterService masterService, 
+            IAttachmentRepository attachmentRepo, 
+            ICreditCheckingRepository creditCheckingRepo)
         {
             _appRepo = appRepo;
             _masterService = masterService;
+            _attachmentRepo = attachmentRepo;
+            _creditCheckingRepo = creditCheckingRepo;
         }
 
         private string GetCustomerSexFromTitle(string titleId)
@@ -121,11 +128,11 @@ namespace MamApi.Services
             return app;
         }
 
-        public async Task<MktApplication> SaveAppBeforeSubmitToCreditChecking(MktApplication app, UserProfile userProfile)
+        public MktApplication SaveAppBeforeSubmitToCreditChecking(MktApplication app, UserProfile userProfile)
         {
             using (var transaction = _appRepo.BeginTransaction())
             {
-                await _appRepo.CommitAsync();
+                _appRepo.Commit();
 
                 _appRepo.UpdateApplicationCurrentCarId(app.Car.Id, app.AppId, transaction);
 
@@ -136,6 +143,128 @@ namespace MamApi.Services
             }
 
             return app;
+        }
+
+        public void SubmitToCreditChecking(string appId, int customerId, bool hasConsentScoreModel,
+            ICollection<AttachmentUploadResource> attachmentUploadResourceFiles,
+            UserProfile userProfile)
+        {
+            using (var transaction = _creditCheckingRepo.BeginTransaction())
+            {
+                CcCreditChk creditChecking = SaveCreditCheckingForCustomer(appId, customerId,
+                    hasConsentScoreModel, userProfile.UserId);
+
+                _creditCheckingRepo.Commit();
+
+                int creditCheckingId = creditChecking.Id;
+
+                int attachmentFileCount = AddAttachmentFiles(appId, customerId,
+                    creditCheckingId, attachmentUploadResourceFiles, userProfile.UserId);
+
+                _attachmentRepo.Commit();
+                
+                _creditCheckingRepo.SaveConsentReceiveStatus(creditCheckingId, userProfile.UserId);
+
+                _creditCheckingRepo.Commit();
+
+                transaction.Commit();
+            }
+
+        }
+
+        private CcCreditChk SaveCreditCheckingForCustomer(string appId, int customerId, bool hasConsentScoreModel,
+            string createdByUserId)
+        {
+            var creditCheckingFromRepo = _creditCheckingRepo
+                .Query(c => c.AppId == appId && c.CustomerId == customerId)
+                .SingleOrDefault();
+
+            if (creditCheckingFromRepo == null)
+            {
+                creditCheckingFromRepo = new CcCreditChk
+                {
+                    CustomerId = customerId,
+                    AppId = appId,
+                    CheckStatus = BusinessConstant.CreditCheckingStatusOnProcess,
+                    FlagManualNcb = false,
+                    MarketingSubmitTime = DateTime.Now,
+                    Status = BusinessConstant.StatusActive,
+                    CreateBy = createdByUserId,
+                    CreateDate = DateTime.Now,
+                    FlagConsentSCRM = hasConsentScoreModel
+                };
+            }
+
+            _creditCheckingRepo.Add(creditCheckingFromRepo);
+            //_creditCheckingRepo.Commit();
+
+            return creditCheckingFromRepo;
+        }
+
+        private int AddAttachmentFiles(string appId, int customerId, long creditCheckingId,
+            ICollection<AttachmentUploadResource> attachmentUploadResourceFiles,
+            string createdByUserId)
+        {
+            // Upsert Attachment rows for this App. and Customer
+            IEnumerable<Attachment> attachmentsFromRepo = _attachmentRepo.Query(a => a.AppId == appId && a.CustomerId == customerId);
+
+            int seq = 1;
+
+            if (attachmentsFromRepo != null) 
+            {
+                // Loop by New Upload files from User
+                foreach (var newAttachment in attachmentUploadResourceFiles)
+                {
+                    var existingAttachment = _attachmentRepo.FindByKey(seq, newAttachment.AppId, 
+                                                newAttachment.CustomerId);
+
+                    // Add new if not found
+                    if (existingAttachment == null)
+                    {
+                        _attachmentRepo.Add(new Attachment
+                        {
+                            Id = seq,
+                            AppId = newAttachment.AppId,
+                            CustomerId = newAttachment.CustomerId,
+                            CCCreditChkId = creditCheckingId,
+                            AttachmentType = newAttachment.AttachmentType,
+                            Name = newAttachment.Name,
+                            FileName = string.Empty,
+                            Remark = string.Empty,
+                            Status = BusinessConstant.StatusActive,
+                            CreateBy = createdByUserId,
+                            CreateDate = DateTime.Now,
+                            UpdateBy = createdByUserId,
+                            UpdateDate = DateTime.Now
+                        });
+                    }
+                    else
+                    {
+                        existingAttachment.Id = seq;
+                        existingAttachment.AppId = newAttachment.AppId;
+                        existingAttachment.CustomerId = newAttachment.CustomerId;
+                        existingAttachment.CCCreditChkId = creditCheckingId;
+                        existingAttachment.AttachmentType = newAttachment.AttachmentType;
+                        existingAttachment.Name = newAttachment.Name;
+                        existingAttachment.FileName = string.Empty;
+                        existingAttachment.Remark = string.Empty;
+                        existingAttachment.Status = BusinessConstant.StatusActive;
+                        existingAttachment.CreateBy = createdByUserId;
+                        existingAttachment.CreateDate = DateTime.Now;
+                        existingAttachment.UpdateBy = createdByUserId;
+                        existingAttachment.UpdateDate = DateTime.Now;
+                    }
+
+
+                    //    //drSubAttachment.Attachment_CCCreditChkID = this.CCCreditChk_ID;
+
+                    seq++;
+                }
+
+                //_attachmentRepo.Commit();
+            }
+
+            return seq;
         }
 
         public MktApplication GetApp(string appId)
@@ -186,7 +315,7 @@ namespace MamApi.Services
 
         public void Commit()
         {
-
+            _appRepo.Commit();
         }
 
         

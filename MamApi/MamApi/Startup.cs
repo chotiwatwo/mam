@@ -85,6 +85,8 @@ namespace MamApi
             services.AddTransient<IMasterRepository, MasterRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IParameterRepository, ParameterRepository>();
+            services.AddTransient<IAttachmentRepository, AttachmentRepository>();
+            services.AddTransient<ICreditCheckingRepository, CreditCheckingRepository>();
 
             //services.AddCors();
 

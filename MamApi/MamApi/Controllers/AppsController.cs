@@ -9,6 +9,7 @@ using System;
 using Serilog;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace MamApi.Controllers
 {
@@ -414,8 +415,63 @@ namespace MamApi.Controllers
                 };
 
             }
+            else
+            {
+                MktAddress documentAddress = customer.Addresses
+                    .SingleOrDefault(a => a.AddressType == BusinessConstant.AddressType.Document.ToString());
+
+                if (documentAddress != null)
+                {
+                    documentAddress.AddressCode = checkNCBApp.MailingAddressCode ?? string.Empty;
+                    documentAddress.HouseNo = checkNCBApp.MailingHouseNo;
+                    documentAddress.Floor = checkNCBApp.MailingFloor ?? string.Empty;
+                    documentAddress.RoomNo = checkNCBApp.MailingRoomNo ?? string.Empty;
+                    documentAddress.Moo = checkNCBApp.MailingMoo ?? string.Empty;
+                    documentAddress.Soi = checkNCBApp.MailingSoi ?? string.Empty;
+                    documentAddress.Road = checkNCBApp.MailingRoad ?? string.Empty;
+                    documentAddress.DistrictId = checkNCBApp.MailingDistrictId;
+                    documentAddress.AmphurId = checkNCBApp.MailingAmphurId;
+                    documentAddress.ProvinceId = checkNCBApp.MailingProvinceId;
+                    documentAddress.ZipCode = checkNCBApp.MailingZipCode;
+                }
+            }
 
             return customer;
+        }
+
+        private MktApplication SaveAppBeforeSubmitToCreditChecking(
+            MktApplication app, UserProfile userProfile, CheckNCBAppResource checkNCBApp)
+        {
+            if (app == null)
+                return null;
+
+            app.LoanType = UpdateLoanTypeBeforeSubmitToCreditChecking(app.AppId, userProfile.UserId, checkNCBApp,
+                app.LoanType);
+
+            app.Car = UpdateCarBeforeSubmitToCreditChecking(app.AppId, userProfile.UserId, checkNCBApp,
+                app.Car);
+
+            app.Customer = UpdateCustomerBeforeSubmitToCreditChecking(app.AppId, userProfile.UserId, checkNCBApp,
+                app.Customer);
+
+            MktApplication updatedApp = _appService.SaveAppBeforeSubmitToCreditChecking(app, userProfile);
+
+            return updatedApp;
+        }
+
+        private bool SendToCreditChecking(
+            MktApplication app, UserProfile userProfile, CheckNCBAppResource checkNCBApp)
+        {
+            if (app == null)
+                return false;
+
+            bool hasConsentScoreModel = checkNCBApp.Attachments.Any(a =>
+                    a.AttachmentType == BusinessConstant.AttachmentTypeConsentModel);
+
+            _appService.SubmitToCreditChecking(app.AppId, app.Customer.Id, hasConsentScoreModel,
+                checkNCBApp.Attachments, userProfile);
+
+            return true; // Success
         }
 
         [HttpPost("{appId}/creditchecking")]
@@ -447,198 +503,10 @@ namespace MamApi.Controllers
 
                 var app = _appService.GetApp(appId);
 
-                app.LoanType = UpdateLoanTypeBeforeSubmitToCreditChecking(appId, userProfile.UserId, checkNCBApp, 
-                    app.LoanType);
+                var updatedApp = SaveAppBeforeSubmitToCreditChecking(app, userProfile, checkNCBApp);
 
-                app.Car = UpdateCarBeforeSubmitToCreditChecking(appId, userProfile.UserId, checkNCBApp, 
-                    app.Car);
-
-                app.Customer = UpdateCustomerBeforeSubmitToCreditChecking(appId, userProfile.UserId, checkNCBApp,
-                    app.Customer);
-
-                //if (app.LoanType == null)
-                //{
-                //    app.LoanType = new MktLoanType()
-                //    {
-                //        AppId = appId,
-                //        TypeId = checkNCBApp.LoanType,
-                //        Status = BusinessConstant.StatusActive,
-                //        CreateBy = userProfile.UserId,
-                //        CreateDate = DateTime.Now,
-
-                //        PopularBrand = checkNCBApp.PopularBrand,
-                //        IsCarlessOrEqual10 = checkNCBApp.CarAgeLessThanOrEqual10Years,
-                //        GroupOccType = checkNCBApp.GroupOccupationType
-                //    };
-                //}
-
-                //app.LoanType.TypeId = checkNCBApp.LoanType;
-                //app.LoanType.PopularBrand = checkNCBApp.PopularBrand;
-                //app.LoanType.IsCarlessOrEqual10 = checkNCBApp.CarAgeLessThanOrEqual10Years;
-                //app.LoanType.GroupOccType = checkNCBApp.GroupOccupationType;
-
-                //if (app.Car == null)
-                //{
-                //    DateTime updatedDate = DateTime.Now;
-
-                //    app.Car = new MktCar()
-                //    {
-                //        AppId = appId,
-                //        //OldNewCar = checkNCBApp.NewOrOldCar,
-                //        OldCarVatType = BusinessConstant.NonSelectedDropDownIndex,
-                //        LicenseNo = string.Empty,
-                //        ChassisCode = string.Empty,
-                //        HirePrice = 0,
-                //        RefPrice = 0,
-                //        NewCarPrice = 0,
-                //        AssessmentPrice = 0,
-                //        Status = BusinessConstant.StatusActive,
-                //        CreateBy = userProfile.UserId,
-                //        CreateDate = updatedDate,
-                //        UpdateBy = userProfile.UserId,
-                //        UpdateDate = updatedDate
-                //    };
-                //}
-
-                //app.Car.OldNewCar = checkNCBApp.NewOrOldCar;
-
-                //app.Customer.NewOrOld = checkNCBApp.NewOrOldCustomer;
-                //app.Customer.CardType = checkNCBApp.CardType;
-                //app.Customer.IDCardNo = checkNCBApp.IDCardNo;
-                //app.Customer.TitleId = checkNCBApp.TitleId;
-                //app.Customer.FirstNameThai = checkNCBApp.FirstNameThai;
-                //app.Customer.LastNameThai = checkNCBApp.LastNameThai;
-                //app.Customer.Sex = checkNCBApp.SexId;
-                //app.Customer.BirthDate = checkNCBApp.BirthDate;
-
-                //if ((app.Customer.Addresses == null) || app.Customer.Addresses.Count == 0)
-                //{
-                //    app.Customer.Addresses = new MktAddress[]
-                //    {
-                //        new MktAddress
-                //        {
-                //            Id = 1,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Address.ToString(),
-                //            HouseNo = string.Empty,
-                //            Floor = string.Empty,
-                //            RoomNo = string.Empty,
-                //            Moo = string.Empty,
-                //            Soi = string.Empty,
-                //            Road = string.Empty,
-                //            DistrictId = 0,
-                //            AmphurId = 0,
-                //            ProvinceId = 0,
-                //            Status = BusinessConstant.StatusActive
-                //        },
-
-                //        new MktAddress
-                //        {
-                //            Id = 2,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Current.ToString(),
-                //            HouseNo = string.Empty,
-                //            Floor = string.Empty,
-                //            RoomNo = string.Empty,
-                //            Moo = string.Empty,
-                //            Soi = string.Empty,
-                //            Road = string.Empty,
-                //            DistrictId = 0,
-                //            AmphurId = 0,
-                //            ProvinceId = 0,
-                //            Status = BusinessConstant.StatusActive
-                //        },
-
-                //        new MktAddress
-                //        {
-                //            Id = 3,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Debt.ToString(),
-                //            HouseNo = string.Empty,
-                //            Floor = string.Empty,
-                //            RoomNo = string.Empty,
-                //            Moo = string.Empty,
-                //            Soi = string.Empty,
-                //            Road = string.Empty,
-                //            DistrictId = 0,
-                //            AmphurId = 0,
-                //            ProvinceId = 0,
-                //            Status = BusinessConstant.StatusActive
-                //        },
-
-                //        new MktAddress
-                //        {
-                //            Id = 4,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Document.ToString(),
-                //            AddressCode = checkNCBApp.MailingAddressCode ?? string.Empty,
-                //            HouseNo = checkNCBApp.MailingHouseNo,
-                //            Floor = checkNCBApp.MailingFloor ?? string.Empty,
-                //            RoomNo = checkNCBApp.MailingRoomNo ?? string.Empty,
-                //            Moo = checkNCBApp.MailingMoo ?? string.Empty,
-                //            Soi = checkNCBApp.MailingSoi ?? string.Empty,
-                //            Road = checkNCBApp.MailingRoad ?? string.Empty,
-                //            DistrictId = checkNCBApp.MailingDistrictId,
-                //            AmphurId = checkNCBApp.MailingAmphurId,
-                //            ProvinceId = checkNCBApp.MailingProvinceId,
-                //            ZipCode = checkNCBApp.MailingZipCode,
-                //            Status = BusinessConstant.StatusActive
-                //        },
-
-                //        new MktAddress
-                //        {
-                //            Id = 5,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Office.ToString(),
-                //            HouseNo = string.Empty,
-                //            Floor = string.Empty,
-                //            RoomNo = string.Empty,
-                //            Moo = string.Empty,
-                //            Soi = string.Empty,
-                //            Road = string.Empty,
-                //            DistrictId = 0,
-                //            AmphurId = 0,
-                //            ProvinceId = 0,
-                //            Status = BusinessConstant.StatusActive
-                //        },
-
-                //        new MktAddress
-                //        {
-                //            Id = 6,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Other.ToString(),
-                //            HouseNo = string.Empty,
-                //            Floor = string.Empty,
-                //            RoomNo = string.Empty,
-                //            Moo = string.Empty,
-                //            Soi = string.Empty,
-                //            Road = string.Empty,
-                //            DistrictId = 0,
-                //            AmphurId = 0,
-                //            ProvinceId = 0,
-                //            Status = BusinessConstant.StatusActive
-                //        },
-
-                //        new MktAddress
-                //        {
-                //            Id = 7,
-                //            CustomerId = app.Customer.Id,
-                //            AddressType = BusinessConstant.AddressType.Person.ToString(),
-                //            HouseNo = string.Empty,
-                //            Floor = string.Empty,
-                //            RoomNo = string.Empty,
-                //            Moo = string.Empty,
-                //            Soi = string.Empty,
-                //            Road = string.Empty,
-                //            DistrictId = 0,
-                //            AmphurId = 0,
-                //            ProvinceId = 0,
-                //            Status = BusinessConstant.StatusActive
-                //        }
-                //    };
-                //}
-
-                var updatedApp = _appService.SaveAppBeforeSubmitToCreditChecking(app, userProfile);
+                // 4. Send to Credit Checking
+                bool isOK = SendToCreditChecking(updatedApp, userProfile, checkNCBApp);
 
                 return Ok(updatedApp);
             }

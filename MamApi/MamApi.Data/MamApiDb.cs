@@ -19,6 +19,10 @@ namespace MamApi.Data
         public DbSet<MktLoanType> MktLoanTypes { get; set; }
         public DbSet<MktCustomer> MktCustomers { get; set; }
         public DbSet<MktCar> MktCars { get; set; }
+
+        public DbSet<CcCreditChk> CcCreditChks { get; set; }
+        public DbSet<CcConsent> CcConsents { get; set; }
+
         public DbSet<Branch> Branches { get; set; }
         public DbSet<MasterInfo> MasterInfos { get; set; }
         public DbSet<User> Users { get; set; }
@@ -70,6 +74,11 @@ namespace MamApi.Data
                 .WithOne()
                 .HasForeignKey<MktCar>(c => c.AppId);
 
+            //appEntity
+            //    .HasMany(a => a.CreditChecks)
+            //    .WithOne()
+            //    .HasForeignKey(c => c.AppId);
+
             modelBuilder
                 .Entity<MktApplicationExtend>()
                 .ToTable("MKT_ApplicationExtend");
@@ -91,6 +100,15 @@ namespace MamApi.Data
             modelBuilder
                 .Entity<MktCar>()
                 .ToTable("MKT_Car");
+
+            modelBuilder
+                .Entity<CcCreditChk>()
+                .ToTable("CC_CreditChk");
+
+            modelBuilder
+                .Entity<CcConsent>()
+                .ToTable("CC_Consent")
+                .HasKey(c => new { c.Id, c.CcCreditChkId });
 
             #endregion <<< MKT Application >>>
 

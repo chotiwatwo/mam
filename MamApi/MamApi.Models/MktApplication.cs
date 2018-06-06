@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MamApi.Models
 {
-    public partial class MktApplication
+    public class MktApplication
     {
         [Key]
         [Column("MKT_Application_ID")]

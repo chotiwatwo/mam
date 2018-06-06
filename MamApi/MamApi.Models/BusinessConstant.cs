@@ -54,5 +54,10 @@ namespace MamApi.Models
             Other,
             Person
         }
+
+        // Credit Checking
+        public const string CreditCheckingStatusOnProcess = "O";
+        public const string ConsentStatusOnProcess = "O";
+
     }
 }

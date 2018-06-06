@@ -412,7 +412,8 @@ namespace MamApi.Data
                                      //.ThenInclude(c => c.Addresses)
                                      //.ThenInclude(ad => ad.Amphur)
 
-                                     .SingleOrDefault();
+                                     .FirstOrDefault();
+                                     //.SingleOrDefault();
 
             return app;
         }
@@ -437,9 +438,11 @@ namespace MamApi.Data
                                      //.ThenInclude(c => c.Addresses)
                                      //.ThenInclude(ad => ad.Amphur)
 
-                                     .SingleOrDefault();
+                                     .FirstOrDefault();
 
             return app;
         }
+
+
     }
 }
