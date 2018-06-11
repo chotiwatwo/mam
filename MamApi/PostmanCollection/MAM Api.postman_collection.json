@@ -135,7 +135,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"cardType\": \"30\",\n  \"idCardNo\": \"3101501514494\",\n  \"titleId\": \"1\",\n  \"firstNameThai\": \"โม\",\n  \"lastNameThai\": \"ซาล่าห์\"\n}"
+							"raw": "{\r\n  \"cardType\": \"30\",\r\n  \"idCardNo\": \"3190300176191\",\r\n  \"titleId\": \"1\",\r\n  \"firstNameThai\": \"ดิเอโก้\",\r\n  \"lastNameThai\": \"มาราโดน่า\"\r\n}"
 						},
 						"url": {
 							"raw": "{{BaseURL}}/api/apps",
@@ -190,7 +190,7 @@
 							"variable": [
 								{
 									"key": "appId",
-									"value": "0161003089"
+									"value": "1561000429"
 								}
 							]
 						}
@@ -505,19 +505,19 @@
 								},
 								{
 									"key": "appId",
-									"value": "9961000999",
+									"value": "1561000429",
 									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "customerId",
-									"value": "383790",
+									"value": "404521",
 									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "attachmentType",
-									"value": "C",
+									"value": "T",
 									"description": "ex. C,I,F,O,T etc.  (api [Get Attachment Types] http://mam.cimbthaiauto.com/api/masters/attachment-types)",
 									"type": "text"
 								}
@@ -554,7 +554,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"appId\": \"0161003082\",\n    \"newOrOldCustomer\": \"O\",\n    \"cardType\": \"30\",\n    \"idCardNo\": \"3961100322180\",\n    \"titleId\": \"2\",\n    \"firstNameThai\": \"Janet\",\n    \"lastNameThai\": \"Jackson 5\",\n    \"sexId\": \"30\",\n    \"birthDate\": \"1976-08-01T00:00:00\",\n    \"mailingAddressCode\": \"1234567890\",\n    \"mailingHouseNo\": \"11\",\n    \"mailingFloor\":\"ชั้น 224\",\n    \"mailingRoomNo\":\"333\",\n    \"mailingMoo\": \"12\",\n    \"mailingSoi\":\"พัฒนาการ 888\",\n    \"mailingRoad\":\"พัฒนาการ\",\n    \"mailingProvinceId\": 1,\n    \"mailingAmphurId\": 1015,\n    \"mailingDistrictId\": 84,\n    \"mailingZipCode\": \"10600\",\n    \"mailingApartment\": \"LPN\",\n    \"loanType\": \"B\",\n    \"newOrOldCar\": \"N\",\n    \"popularBrand\": \"1\",\n    \"carAgeLessThanOrEqual10Years\": \"1\",\n    \"groupOccupationType\": \"02\",\n    \"attachments\": \n     [\n      {\n        \"appId\": \"0161003082\",\n        \"customerId\": 404512,\n        \"attachmentType\": \"C\",\n        \"attachmentTypeName\": \"Consent\",\n        \"name\": \"0161003082_404512_Consent_987.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_Consent.jpg\"\n    },\n      \n      {\n        \"appId\": \"0161003082\",\n        \"customerId\": 404512,\n        \"attachmentType\": \"I\",\n        \"attachmentTypeName\": \"บัตรประชาชน\",\n        \"name\": \"0161003082_404512_บัตรประชาชน.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_บัตรประชาชน.jpg\"\n    },      \n      \n      {\n        \"appId\": \"0161003082\",\n        \"customerId\": 404512,\n        \"attachmentType\": \"F\",\n        \"attachmentTypeName\": \"คำเสนอขอเช่าซื้อ ด้านหน้า\",\n        \"name\": \"0161003082_404512_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg\"\n    },\n    \n      {\n        \"appId\": \"0161003082\",\n        \"customerId\": 404512,\n        \"attachmentType\": \"T\",\n        \"attachmentTypeName\": \"Consent Model 555\",\n        \"name\": \"0161003082_404512_Consent Model_5555555.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/0161003082/0161003082_404512_Consent Model.jpg\"\n    }    \n     ]\n}"
+							"raw": "{\n    \"appId\": \"1561000429\",\n    \"newOrOldCustomer\": \"N\",\n    \"cardType\": \"30\",\n    \"idCardNo\": \"3190300176191\",\n    \"titleId\": \"1\",\n    \"firstNameThai\": \"ดิเอโก้\",\n    \"lastNameThai\": \"มาราโดน่า\",\n    \"sexId\": \"23\",\n    \"birthDate\": \"1973-07-02T00:00:00\",\n    \"mailingAddressCode\": \"1234567890\",\n    \"mailingHouseNo\": \"1\",\n    \"mailingFloor\":\"ชั้น24\",\n    \"mailingRoomNo\":\"333\",\n    \"mailingMoo\": \"12\",\n    \"mailingSoi\":\"พัฒนาการ 888\",\n    \"mailingRoad\":\"พัฒนาการ\",\n    \"mailingProvinceId\": 1,\n    \"mailingAmphurId\": 1015,\n    \"mailingDistrictId\": 84,\n    \"mailingZipCode\": \"10600\",\n    \"mailingApartment\": \"LPN\",\n    \"loanType\": \"B\",\n    \"newOrOldCar\": \"N\",\n    \"popularBrand\": \"1\",\n    \"carAgeLessThanOrEqual10Years\": \"1\",\n    \"groupOccupationType\": \"02\",\n    \"attachments\": \n     [\n    {\n        \"appId\": \"1561000429\",\n        \"customerId\": 404521,\n        \"attachmentType\": \"C\",\n        \"attachmentTypeName\": \"Consent\",\n        \"name\": \"1561000429_404521_Consent.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/1561000429/1561000429_404521_Consent.jpg\"\n    },\n      \n    {\n        \"appId\": \"1561000429\",\n        \"customerId\": 404521,\n        \"attachmentType\": \"I\",\n        \"attachmentTypeName\": \"บัตรประชาชน\",\n        \"name\": \"1561000429_404521_บัตรประชาชน.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/1561000429/1561000429_404521_บัตรประชาชน.jpg\"\n    },\n    \n    {\n        \"appId\": \"1561000429\",\n        \"customerId\": 404521,\n        \"attachmentType\": \"F\",\n        \"attachmentTypeName\": \"คำเสนอขอเช่าซื้อ ด้านหน้า\",\n        \"name\": \"1561000429_404521_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/1561000429/1561000429_404521_คำเสนอขอเช่าซื้อ ด้านหน้า.jpg\"\n    },\n    \n    {\n        \"appId\": \"1561000429\",\n        \"customerId\": 404521,\n        \"attachmentType\": \"T\",\n        \"attachmentTypeName\": \"Consent Model\",\n        \"name\": \"1561000429_404521_Consent Model.jpg\",\n        \"displayFilePath\": \"http://mam.cimbthaiauto.com/uploads/CreditChecking/1561000429/1561000429_404521_Consent Model.jpg\"\n    }\n      \n     ]\n}"
 						},
 						"url": {
 							"raw": "{{BaseURL}}/api/apps/:appId/creditchecking",
@@ -570,8 +570,74 @@
 							"variable": [
 								{
 									"key": "appId",
-									"value": "0161003082"
+									"value": "1561000429"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download share file server",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/files/server/download",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"server",
+								"download"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download File",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"AppId\" : \"testAc012\",\n\t\"Category\" : \"cat1\",\n\t\"CustomerId\" : \"00001\",\n\t\"DisplayFilePath\" : \"xxxxx\"\n}"
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/files/creditcheck/download",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"creditcheck",
+								"download"
 							]
 						}
 					},
@@ -1210,6 +1276,40 @@
 							]
 						},
 						"description": "Topup Paytypes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"description": "",
+			"item": [
+				{
+					"name": "Send Notification Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"to\": \"cBxFRup4cS4:APA91bGhsPxrKujxaIcC2x9RZuqMzi_GKjOcY7VaPxpXbCswGZXi9DpcxjEpN5gR3076S8ZSAol7mDbK7yT2d-MyiJ3m2U8OGr7ibez6Y4ZmbTH7DQhmrVkmnSLGW0ZV9vr5_w0ob6jm\",\r\n    \r\n    \"notification\": {\r\n    \t\"title\" : \"Notice Title\",\r\n    \t\"body\": \"Notice Body\"\r\n    },\r\n    \r\n    \"data\": {\r\n        \"title\": \"ผลการตรวจ NCB\",\r\n        \"appId\": \"0161000999\",\r\n        \"body\": \"ผ่านนะ\",\r\n        \"senderDepartment\": \"Credit Checking\",\r\n        \"senderUsername\": \"กิตต์รวี\",\r\n        \"sentTime\": \"2018-06-07T13:05:07.1211272+07:00\",\r\n        \"actionName\": \"NCB\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/messages/send",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"messages",
+								"send"
+							]
+						}
 					},
 					"response": []
 				}

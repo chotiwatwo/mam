@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamApi", "MamApi\MamApi.csproj", "{05DA6039-D14E-45C2-8979-6F5370E64B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamApi", "MamApi\MamApi.csproj", "{05DA6039-D14E-45C2-8979-6F5370E64B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamApi.Models", "MamApi.Models\MamApi.Models.csproj", "{D91D6CDA-695D-4DC7-B690-96AFEAD78A1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamApi.Models", "MamApi.Models\MamApi.Models.csproj", "{D91D6CDA-695D-4DC7-B690-96AFEAD78A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamApi.Data", "MamApi.Data\MamApi.Data.csproj", "{C9A5F87D-F296-4353-9975-96C260A583EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamApi.Data", "MamApi.Data\MamApi.Data.csproj", "{C9A5F87D-F296-4353-9975-96C260A583EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamApi.Services", "MamApi.Services\MamApi.Services.csproj", "{F37E20F7-2D8F-48CB-8A8F-504C56AEBAB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamApi.Services", "MamApi.Services\MamApi.Services.csproj", "{F37E20F7-2D8F-48CB-8A8F-504C56AEBAB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamApi.ViewModels", "MamApi.ViewModels\MamApi.ViewModels.csproj", "{2F855B88-C960-4DDC-AD43-F307872D6510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamApi.ViewModels", "MamApi.ViewModels\MamApi.ViewModels.csproj", "{2F855B88-C960-4DDC-AD43-F307872D6510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamApi.Helpers", "MamApi.Helpers\MamApi.Helpers.csproj", "{24331706-6FD7-46BA-8EFB-DEC6555E8085}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2F855B88-C960-4DDC-AD43-F307872D6510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F855B88-C960-4DDC-AD43-F307872D6510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F855B88-C960-4DDC-AD43-F307872D6510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24331706-6FD7-46BA-8EFB-DEC6555E8085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24331706-6FD7-46BA-8EFB-DEC6555E8085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24331706-6FD7-46BA-8EFB-DEC6555E8085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24331706-6FD7-46BA-8EFB-DEC6555E8085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

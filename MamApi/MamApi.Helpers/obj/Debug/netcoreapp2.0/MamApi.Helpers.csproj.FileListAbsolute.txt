@@ -1,0 +1,9 @@
+C:\Projects\mam\MamApi\MamApi.Helpers\bin\Debug\netcoreapp2.0\MamApi.Helpers.deps.json
+C:\Projects\mam\MamApi\MamApi.Helpers\bin\Debug\netcoreapp2.0\MamApi.Helpers.dll
+C:\Projects\mam\MamApi\MamApi.Helpers\obj\Debug\netcoreapp2.0\MamApi.Helpers.csprojResolveAssemblyReference.cache
+C:\Projects\mam\MamApi\MamApi.Helpers\obj\Debug\netcoreapp2.0\MamApi.Helpers.csproj.CoreCompileInputs.cache
+C:\Projects\mam\MamApi\MamApi.Helpers\obj\Debug\netcoreapp2.0\MamApi.Helpers.AssemblyInfoInputs.cache
+C:\Projects\mam\MamApi\MamApi.Helpers\obj\Debug\netcoreapp2.0\MamApi.Helpers.AssemblyInfo.cs
+C:\Projects\mam\MamApi\MamApi.Helpers\bin\Debug\netcoreapp2.0\MamApi.Helpers.pdb
+C:\Projects\mam\MamApi\MamApi.Helpers\obj\Debug\netcoreapp2.0\MamApi.Helpers.dll
+C:\Projects\mam\MamApi\MamApi.Helpers\obj\Debug\netcoreapp2.0\MamApi.Helpers.pdb

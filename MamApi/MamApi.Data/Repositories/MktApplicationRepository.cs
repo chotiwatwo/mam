@@ -427,10 +427,12 @@ namespace MamApi.Data
                                      .Include(a => a.ApplicationExtend)
                                      .Include(a => a.LoanType)
                                      .Include(a => a.Car)
+                                     .Include(a => a.Branch)
+                                     .Include(a => a.AppOwner)
 
                                      .Include(a => a.Customer)
                                      .ThenInclude(c => c.Addresses)
-                                     //.ThenInclude(ad => ad.District)
+                                     .ThenInclude(ad => ad.District)
                                      //.ThenInclude(dt => dt.Amphur)
                                      //.ThenInclude(am => am.Province)
 

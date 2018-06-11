@@ -1,0 +1,38 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "09b902a17913e3bf29e3aa5fed87f1f467eb6645"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "MamApi.Helpers/1.0.0": {
+        "dependencies": {
+          "RestSharp": "106.3.0"
+        },
+        "runtime": {
+          "MamApi.Helpers.dll": {}
+        }
+      },
+      "RestSharp/106.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MamApi.Helpers/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RestSharp/106.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4ObVo8XyYZ5jcOGFLXv1L8Qias6g46DAIj7ej27vUEDrbX/VwJrd0h75dlTowDIu41TBBfoBUGoQQW0cv5wfFQ==",
+      "path": "restsharp/106.3.0",
+      "hashPath": "restsharp.106.3.0.nupkg.sha512"
+    }
+  }
+}

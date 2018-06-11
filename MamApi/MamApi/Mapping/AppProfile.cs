@@ -13,11 +13,15 @@ namespace MamApi.Mapping
     {
         public AppProfile()
         {
-            // API Resource to Domain
+            #region <<<API Resource to Domain>>> To map input data from Client for Insert, Update, Delete to DB
+            
             CreateMap<CreateAppResource, MktApplication>();
             CreateMap<CreateCustomerResource, MktCustomer>();
 
-            // Domain to API Resource
+            #endregion API Resource to Domain data
+
+            #region <<<Domain to API Resource>>> To map query result from DB and return to Client
+            // GetApp to CheckNCB  => appService.GetAppToCheckNCB() 
             CreateMap<MktApplication, CheckNCBAppResource>()
                 .ForMember(chk => chk.NewOrOldCustomer,
                     opt => opt.MapFrom(a => a.Customer.NewOrOld))
@@ -33,6 +37,17 @@ namespace MamApi.Mapping
                     opt => opt.MapFrom(a => a.Customer.LastNameThai))
                 .ForMember(chk => chk.SexId,
                     opt => opt.MapFrom(a => a.Customer.Sex));
+
+            // Get Full App => appService.GetApp()
+            CreateMap<MktApplication, ApplicationResource>();
+                //.ForMember(ar => ar.Branch,
+                //    opt => opt.MapFrom(ma => ma.Branch));
+
+            CreateMap<MktCustomer, CustomerResource>();
+
+            CreateMap<MktAddress, AddressResource>();
+
+            #endregion Domain to API Resource
 
             // API Resource to Domain
             //CreateMap<CheckNCBAppResource, MktApplication>()
@@ -51,8 +66,8 @@ namespace MamApi.Mapping
             //    .ForMember(a => a.Customer.Sex,
             //        opt => opt.MapFrom(chk => chk.SexId));
 
-                //.ForMember(a => a.Customer.Addresses,
-                //    opt => opt.ResolveUsing())
+            //.ForMember(a => a.Customer.Addresses,
+            //    opt => opt.ResolveUsing())
         }
     }
 }

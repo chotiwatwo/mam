@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">tumpush</string>
+    <string name="action_settings">Settings</string>
+    <string name="FCM_PREF">com.jubtum.tumpush.fcm_pref</string>
+    <string name="FCM_TOKEN">com.jubtum.tumpush.fcm_token</string>
+
+</resources>

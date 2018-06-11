@@ -29,6 +29,7 @@ namespace MamApi.Models
         [Required]
         [Column("MKT_Application_OwnerID")]
         public string AppOwnerId { get; set; }
+        public User AppOwner { get; set; }
 
         [Required]
         [Column("MKT_Application_Status")]

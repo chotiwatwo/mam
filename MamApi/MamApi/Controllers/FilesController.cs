@@ -1,8 +1,12 @@
-﻿using System;
+﻿//2018.06.08 NW Modify add "CreditCheckDownloadFile", "ShareDownloadFile" support request download file.
+
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using MamApi.Common;
 using MamApi.Data.Repositories;
 using MamApi.Models;
 using MamApi.Models.Resources;
@@ -10,7 +14,9 @@ using MamApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.Extensions.Configuration;
+using RestSharp;
 using Serilog;
 
 namespace MamApi.Controllers
@@ -18,7 +24,7 @@ namespace MamApi.Controllers
     [Authorize]
     [Produces("application/json")]
     [Route("api/files")]
-    public class FilesController : Controller
+    public class FilesController : MAMController
     {
         private readonly IFileAttachmentService _fileAttachmentService;
 
@@ -91,16 +97,17 @@ namespace MamApi.Controllers
             string[] ArrFilename = fileName.Split('.');
             string FileExtension = ArrFilename[ArrFilename.Length - 1];
 
-            string FormattedFileName = string.Format(FileNameFormat, attachmentInfo.AppId, 
+            string FormattedFileName = string.Format(FileNameFormat, attachmentInfo.AppId,
                 attachmentInfo.CustomerId, AttachmentTypeName, FileExtension);
 
             return FormattedFileName;
         }
-        
+
+
         #endregion
 
         [HttpPost("creditcheck/upload")]
-        public async Task<IActionResult> CreditCheckUploadFile(string appId, int customerId, string attachmentType, 
+        public async Task<IActionResult> CreditCheckUploadFile(string appId, int customerId, string attachmentType,
             IFormFile file)
         {
             // Validate Uploaded File
@@ -183,5 +190,97 @@ namespace MamApi.Controllers
 
             return Ok(uploadAttach);
         }
+
+        /**
+         * Download file from share file server and send to client request.
+         * */
+        [HttpPost("creditcheck/download")]
+        public IActionResult CreditCheckDownloadFile([FromBody] AttachmentDownloadResource attchDownload)
+        {
+            this.Utility.CheckStringIsEmpty(this.ErrorMessage, string.Format("Category invalid.: {0}", attchDownload.Category), attchDownload.Category);
+            this.Utility.CheckStringIsEmpty(this.ErrorMessage, string.Format("Application No invalid.: {0}", attchDownload.AppId), attchDownload.AppId);
+            this.Utility.CheckStringIsEmpty(this.ErrorMessage, string.Format("Display name invalid.: {0}", attchDownload.DisplayFilePath), attchDownload.DisplayFilePath);
+
+            if (!this.ErrorMessage.IsError)
+            {
+                string url = $"{AppSettingJsonConfiguration["Server:FileServer"]}";
+                string urlMethod = $"{AppSettingJsonConfiguration["Server:DownloadMethod"]}";
+
+                var client = new RestClient(new Uri(url));
+
+                var request = new RestRequest(urlMethod, Method.POST);
+                request.RequestFormat = DataFormat.Json;
+                request.AddBody(new
+                {
+                    AppId = "testAc012",
+                    ategory = "cat1",
+                    CustomerId = "00001",
+                    DisplayFilePath = "xxxxx"
+
+                });
+
+                client.AddDefaultHeader("Content-Type", "application/json");
+                string token = ((FrameRequestHeaders)this.Request.Headers).HeaderAuthorization;
+                client.AddDefaultHeader("Authorization", token);
+
+                var restRep = client.Execute(request);
+
+                var resp = restRep.Content;
+
+                return Content(resp);
+            }
+            else
+            {
+                return Content(this.ErrorMessage.ToString());
+            }
+        }
+
+        /**
+         * Download file from local server and send to other request
+         * */
+        [HttpPost("server/download")]
+        public async Task<IActionResult> ShareDownloadFile([FromBody] AttachmentDownloadResource attchDownload)
+        {
+            string fileName;
+            string fileLoc = string.Empty;
+            var msmstr = new MemoryStream();
+            try
+            {
+                fileName = "Fiesta_1.6L_PowerShift.pdf";
+
+                if (String.IsNullOrEmpty(fileName))
+                {
+                    this.ErrorMessage.Add("File name invalid.");
+                }
+
+                var path = Path.Combine(@"D:\Doument\Other\");
+                fileLoc = string.Format("{0}{1}", path, fileName);
+
+                using (var stream = new FileStream(fileLoc, FileMode.Open))
+                {
+                    await stream.CopyToAsync(msmstr);
+                }
+
+            }
+            catch (Exception e)
+            {
+                this.ErrorMessage.Add(e.Message);
+            }
+
+
+            if (this.ErrorMessage.IsError)
+            {
+                return Content(this.ErrorMessage.ToString());
+            }
+            else
+            {
+                msmstr.Position = 0;
+                return File(msmstr, this.FileContentType.GetContentType(fileLoc), Path.GetFileName(fileLoc));
+            }
+        }
+
+
+
+
     }
 }

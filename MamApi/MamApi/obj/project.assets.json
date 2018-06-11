@@ -2941,6 +2941,15 @@
           "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
+      "RestSharp/106.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -5193,6 +5202,19 @@
         },
         "runtime": {
           "bin/placeholder/MamApi.Data.dll": {}
+        }
+      },
+      "MamApi.Helpers/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "RestSharp": "106.3.0"
+        },
+        "compile": {
+          "bin/placeholder/MamApi.Helpers.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MamApi.Helpers.dll": {}
         }
       },
       "MamApi.Models/1.0.0": {
@@ -8251,6 +8273,17 @@
         "lib/netstandard1.0/Remotion.Linq.xml",
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll",
         "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.xml"
+      ]
+    },
+    "RestSharp/106.3.0": {
+      "sha512": "4ObVo8XyYZ5jcOGFLXv1L8Qias6g46DAIj7ej27vUEDrbX/VwJrd0h75dlTowDIu41TBBfoBUGoQQW0cv5wfFQ==",
+      "type": "package",
+      "path": "restsharp/106.3.0",
+      "files": [
+        "lib/net452/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.dll",
+        "restsharp.106.3.0.nupkg.sha512",
+        "restsharp.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -13439,6 +13472,11 @@
       "path": "../MamApi.Data/MamApi.Data.csproj",
       "msbuildProject": "../MamApi.Data/MamApi.Data.csproj"
     },
+    "MamApi.Helpers/1.0.0": {
+      "type": "project",
+      "path": "../MamApi.Helpers/MamApi.Helpers.csproj",
+      "msbuildProject": "../MamApi.Helpers/MamApi.Helpers.csproj"
+    },
     "MamApi.Models/1.0.0": {
       "type": "project",
       "path": "../MamApi.Models/MamApi.Models.csproj",
@@ -13455,6 +13493,7 @@
       "AutoMapper >= 6.2.2",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 1.2.0",
       "MamApi.Data >= 1.0.0",
+      "MamApi.Helpers >= 1.0.0",
       "MamApi.Models >= 1.0.0",
       "MamApi.Services >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.5",
@@ -13499,6 +13538,9 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
+            "C:\\Projects\\mam\\MamApi\\MamApi.Helpers\\MamApi.Helpers.csproj": {
+              "projectPath": "C:\\Projects\\mam\\MamApi\\MamApi.Helpers\\MamApi.Helpers.csproj"
+            },
             "C:\\Projects\\mam\\MamApi\\MamApi.Data\\MamApi.Data.csproj": {
               "projectPath": "C:\\Projects\\mam\\MamApi\\MamApi.Data\\MamApi.Data.csproj"
             },

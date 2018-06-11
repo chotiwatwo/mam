@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MamApi.Data\MamApi.Data.csproj" />
+    <ProjectReference Include="..\MamApi.Helpers\MamApi.Helpers.csproj" />
     <ProjectReference Include="..\MamApi.Models\MamApi.Models.csproj" />
     <ProjectReference Include="..\MamApi.Services\MamApi.Services.csproj" />
   </ItemGroup>

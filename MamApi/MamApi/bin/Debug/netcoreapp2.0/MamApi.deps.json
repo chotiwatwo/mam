@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "2c09a9ebf6631a7a348da420e513cbd6116e8fe6"
+    "signature": "1aa44160014c3e3e0a3952d28d58c20c12988efe"
   },
   "compilationOptions": {
     "defines": [
@@ -26,6 +26,7 @@
           "AutoMapper": "6.2.2",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.2.0",
           "MamApi.Data": "1.0.0",
+          "MamApi.Helpers": "1.0.0",
           "MamApi.Models": "1.0.0",
           "MamApi.Services": "1.0.0",
           "Microsoft.AspNetCore.All": "2.0.5",
@@ -2567,6 +2568,14 @@
           "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
+      "RestSharp/106.3.0": {
+        "runtime": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/RestSharp.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "runtimeTargets": {
           "runtime/debian.8-x64/native/_._": {
@@ -4217,6 +4226,17 @@
           "MamApi.Data.dll": {}
         }
       },
+      "MamApi.Helpers/1.0.0": {
+        "dependencies": {
+          "RestSharp": "106.3.0"
+        },
+        "runtime": {
+          "MamApi.Helpers.dll": {}
+        },
+        "compile": {
+          "MamApi.Helpers.dll": {}
+        }
+      },
       "MamApi.Models/1.0.0": {
         "runtime": {
           "MamApi.Models.dll": {}
@@ -5667,6 +5687,13 @@
       "path": "remotion.linq/2.1.1",
       "hashPath": "remotion.linq.2.1.1.nupkg.sha512"
     },
+    "RestSharp/106.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4ObVo8XyYZ5jcOGFLXv1L8Qias6g46DAIj7ej27vUEDrbX/VwJrd0h75dlTowDIu41TBBfoBUGoQQW0cv5wfFQ==",
+      "path": "restsharp/106.3.0",
+      "hashPath": "restsharp.106.3.0.nupkg.sha512"
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -6613,6 +6640,11 @@
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
     "MamApi.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MamApi.Helpers/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

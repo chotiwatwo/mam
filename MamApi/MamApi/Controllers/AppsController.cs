@@ -68,7 +68,9 @@ namespace MamApi.Controllers
 
                 if (!toCheckNCB)
                 {
-                    return Ok(app);
+                    var appResource = _mapper.Map<MktApplication, ApplicationResource>(app);
+
+                    return Ok(appResource);
                 }
                 else
                 {

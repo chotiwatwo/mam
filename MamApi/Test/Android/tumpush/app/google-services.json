@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "130724683375",
+    "firebase_url": "https://tumpush-b5e03.firebaseio.com",
+    "project_id": "tumpush-b5e03",
+    "storage_bucket": "tumpush-b5e03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130724683375:android:460e6e01fc7e3c33",
+        "android_client_info": {
+          "package_name": "com.jubtum.tumpush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130724683375-2h6s00taprl6aamg2hq14oamlk807bpk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDApDf2BbQgG8e1UkQuhHf3pYtWR6yHkeI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

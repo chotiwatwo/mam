@@ -15,3 +15,5 @@ C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.dll
 C:\Projects\mam\MamApi\MamApi\obj\Debug\netcoreapp2.0\MamApi.pdb
 C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Services.dll
 C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Services.pdb
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Helpers.dll
+C:\Projects\mam\MamApi\MamApi\bin\Debug\netcoreapp2.0\MamApi.Helpers.pdb

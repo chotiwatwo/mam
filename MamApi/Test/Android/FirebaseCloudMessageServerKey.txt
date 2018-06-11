@@ -1,0 +1,16 @@
+FCM Server
+==========
+path  https://fcm.googleapis.com/fcm/send
+
+Server Key :
+AAAAHm_MXm8:APA91bG7sawhCQZS0GiYIqwMdlcIkrN1UZdkoxgkO9MjQGHM2vh979E65V60b55zZdAfozqXGcxxHi99GU5I3sKdDCdTIKQglUzH6dHUa1tUG-WCCavT6GyHuhsmmlbSGqfBTmQyO-Lx
+
+Legacy
+
+AIzaSyA8kqRMX00Pt6uR2ubA6gERIvdm5BEwd6M
+
+--------------
+
+Firebase Token (Generate everytime the app is installed)
+
+cBxFRup4cS4:APA91bGhsPxrKujxaIcC2x9RZuqMzi_GKjOcY7VaPxpXbCswGZXi9DpcxjEpN5gR3076S8ZSAol7mDbK7yT2d-MyiJ3m2U8OGr7ibez6Y4ZmbTH7DQhmrVkmnSLGW0ZV9vr5_w0ob6jm

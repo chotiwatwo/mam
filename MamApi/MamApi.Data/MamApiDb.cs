@@ -74,10 +74,11 @@ namespace MamApi.Data
                 .WithOne()
                 .HasForeignKey<MktCar>(c => c.AppId);
 
-            //appEntity
-            //    .HasMany(a => a.CreditChecks)
-            //    .WithOne()
-            //    .HasForeignKey(c => c.AppId);
+            appEntity
+                .HasOne(a => a.AppOwner)
+                .WithMany()
+                .HasPrincipalKey(o => o.UserId)
+                .HasForeignKey(a => a.AppOwnerId);
 
             modelBuilder
                 .Entity<MktApplicationExtend>()

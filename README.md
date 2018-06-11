@@ -31,3 +31,8 @@ Deploy Web Api V.2 to Vendor
 
 2018-06-06
 Submit To Credit Checking ==> Save to [CC_Consent]
+
+2018-06-11
+Working On Web API : 
+  1. Downloading Uploaded Files
+  2. Push Notification Message to registered mobile device
