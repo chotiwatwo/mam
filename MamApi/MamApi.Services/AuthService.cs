@@ -18,33 +18,15 @@ namespace MamApi.Services
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepo;
+        private readonly ILoginRepository _loginRepo;
 
-        public AuthService(IUserRepository userRepo)
+        public AuthService(IUserRepository userRepo, ILoginRepository loginRepo)
         {
             _userRepo = userRepo;
+            _loginRepo = loginRepo;
         }
 
-        public User CheckCredential(string userName, string password)
-        {
-            string hashedPassword = MD5Hash(password).ToUpper();
-            
-            var user = _userRepo
-                .FindByInclude(
-                    u => u.UserId == userName && u.Password == hashedPassword,
-                    u => u.Position, 
-                    u => u.Department, 
-                    u => u.Branch, 
-                    u => u.GroupLevel)
-                .FirstOrDefault();
-
-            //if (user != null && user.Count() > 0)
-            //    return true;
-            //else
-            //    return false;
-
-            return user;
-        }
-
+        #region <<< Private >>>
         private string MD5Hash(string unhashedPassword)
         {
             using (var md5 = MD5.Create())
@@ -68,14 +50,59 @@ namespace MamApi.Services
             }
         }
 
+        private UserProfile GetUserProfileFromClaimValues(string accessToken)
+        {
+            var handler = new JwtSecurityTokenHandler();
+
+            var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken;
+
+            //return tokenS.Claims.First(claim => claim.Type == claimType);
+
+            UserProfile userProfile = new UserProfile()
+            {
+                UserId = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value,
+                IMEI = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value,
+                UserName = tokenS.Claims.First(claim => claim.Type == "userName").Value,
+                PositionId = tokenS.Claims.First(claim => claim.Type == "positionId").Value,
+                DepartmentId = tokenS.Claims.First(claim => claim.Type == "departmentId").Value,
+                BranchId = tokenS.Claims.First(claim => claim.Type == "branchId").Value,
+                GroupLevelId = tokenS.Claims.First(claim => claim.Type == "groupLevelId").Value
+            };
+
+            return userProfile;
+        }
+
+        
+        #endregion
+
+        public User CheckCredential(string userId, string password)
+        {
+            string hashedPassword = MD5Hash(password).ToUpper();
+            
+            var user = _userRepo
+                .FindByInclude(
+                    u => u.UserId == userId && u.Password == hashedPassword,
+                    u => u.Position, 
+                    u => u.Department, 
+                    u => u.Branch, 
+                    u => u.GroupLevel)
+                .FirstOrDefault();
+
+            //if (user != null && user.Count() > 0)
+            //    return true;
+            //else
+            //    return false;
+
+            return user;
+        }
+              
         public object CreateToken(UserProfileResource userProfile, string issuer, string privateKey)
         {
             var claims = new[]
                     {
-                        // new Claim(JwtRegisteredClaimNames.Sub, userName),
                         new Claim(JwtRegisteredClaimNames.Sub, userProfile.UserId),
-                        //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Jti, userProfile.IMIE),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        //new Claim(JwtRegisteredClaimNames.Jti, userProfile.IMIE),
                         new Claim("userName", userProfile.UserName),
                         new Claim("positionId", userProfile.Position.Id),
                         new Claim("departmentId", userProfile.Department.Id),
@@ -110,58 +137,52 @@ namespace MamApi.Services
             return GetUserProfileFromClaimValues(accessToken);
         }
 
-        private UserProfile GetUserProfileFromClaimValues(string accessToken)
+        private bool ForceLogoutIfAlreadyLogin(string userId)
         {
-            var handler = new JwtSecurityTokenHandler();
+            DateTime logoutTime = Logout(userId);
 
-            var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken;
+            bool IsForceLogoutRequired = (logoutTime > DateTime.MinValue);
 
-            //return tokenS.Claims.First(claim => claim.Type == claimType);
-
-            UserProfile userProfile = new UserProfile()
-            {
-                UserId = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value,
-                IMEI = tokenS.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Jti).Value,
-                UserName = tokenS.Claims.First(claim => claim.Type == "userName").Value,
-                PositionId = tokenS.Claims.First(claim => claim.Type == "positionId").Value,
-                DepartmentId = tokenS.Claims.First(claim => claim.Type == "departmentId").Value,
-                BranchId = tokenS.Claims.First(claim => claim.Type == "branchId").Value,
-                GroupLevelId = tokenS.Claims.First(claim => claim.Type == "groupLevelId").Value
-            };
-
-            return userProfile;
+            return IsForceLogoutRequired;
         }
 
-        //public async Task<string> GetBranchIdFromUserProfile(HttpContext httpContext)
-        //{
-        //    string branchId = await GetClaimValueFromToken(httpContext, "branchId");
+        public long SaveCurrentLogin(LoginResource loginResource)
+        {
+            bool isForceLogoutRequired = ForceLogoutIfAlreadyLogin(loginResource.UserId);
 
-        //    return branchId ?? string.Empty;
-        //}
+            DateTime loginTime = DateTime.Now;
+            var currentLogin = new CurrentLoginMAM
+            {
+                UserID = loginResource.UserId,
+                MobileIMEI = loginResource.IMEI,
+                FirebaseToken = loginResource.FirebaseToken,
+                LoginTime = loginTime,
+                //LogoutTime = loginTime,
+                LastFirebaseToken = loginResource.FirebaseToken
+            };
 
-        //public async Task<string> GetUserIdFromUserProfile(HttpContext httpContext)
-        //{
-        //    string userId = await GetClaimValueFromToken(httpContext, JwtRegisteredClaimNames.Sub);
+            _loginRepo.Add(currentLogin);
 
-        //    return userId ?? string.Empty;
-        //}
+            _loginRepo.Commit();
+            
 
-        //private async Task<string> GetClaimValueFromToken(HttpContext httpContext, string claimType)
-        //{
-        //    var accessToken = await AuthenticationHttpContextExtensions.GetTokenAsync(httpContext, "access_token");
+            return currentLogin.Id;
+        }
 
-        //    var claimValue = GetClaimValue(accessToken, claimType);
+        public DateTime Logout(string userId)
+        {
+            var currentLogin = _loginRepo.GetActiveCurrentLogin(userId);
 
-        //    return claimValue;
-        //}
+            if (currentLogin == null)
+                return DateTime.MinValue;
 
-        //private string GetClaimValue(string accessToken, string claimType)
-        //{
-        //    var handler = new JwtSecurityTokenHandler();
+            currentLogin.LogoutTime = DateTime.Now;
+            currentLogin.FirebaseToken = string.Empty;
+            
+            _loginRepo.Commit();
 
-        //    var tokenS = handler.ReadToken(accessToken) as JwtSecurityToken;
-
-        //    return tokenS.Claims.First(claim => claim.Type == claimType).Value;
-        //}
+            // ถ้าเป็น null ให้ return Minimum Value DateTime 
+            return currentLogin.LogoutTime ?? DateTime.MinValue;
+        }
     }
 }

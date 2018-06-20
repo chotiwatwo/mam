@@ -1,4 +1,3 @@
-C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.csprojResolveAssemblyReference.cache
 C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.csproj.CoreCompileInputs.cache
 C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.AssemblyInfoInputs.cache
 C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.AssemblyInfo.cs
@@ -11,3 +10,4 @@ C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.dll
 C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.pdb
 C:\Projects\mam\MamApi\MamApi.Data\bin\Debug\netcoreapp2.0\System.Data.SqlClient.dll
 C:\Projects\mam\MamApi\MamApi.Data\bin\Debug\netcoreapp2.0\System.Data.SqlClient.xml
+C:\Projects\mam\MamApi\MamApi.Data\obj\Debug\netcoreapp2.0\MamApi.Data.csprojResolveAssemblyReference.cache

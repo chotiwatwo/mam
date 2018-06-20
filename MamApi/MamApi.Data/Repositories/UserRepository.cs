@@ -13,19 +13,5 @@ namespace MamApi.Data.Repositories
         {
 
         }
-
-        //public User CheckCredential(string userName, string password)
-        //{
-        //    var user = this.FindByInclude(u => u.UserId == userName && u.Password == password
-        //        ,i => i.Position, j => j.Department, k => k.Branch)
-        //        .FirstOrDefault();
-
-        //    //if (user != null && user.Count() > 0)
-        //    //    return true;
-        //    //else
-        //    //    return false;
-
-        //    return user;
-        //}
     }
 }

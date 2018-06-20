@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace MamApi.Data
 {
@@ -445,6 +446,22 @@ namespace MamApi.Data
             return app;
         }
 
+        public IEnumerable<object> GetAppsByPage(int pageNo, int pageSize)
+        {
+            var apps = _context.MktApplications
+                               .Select(a => new
+                                   {
+                                       appId = a.AppId,
+                                       appStatus = a.AppStatus
+                                   })
+                               .OrderBy(a => a.appId)
+                               .Skip((pageNo - 1) * pageSize)
+                               .Take(pageSize)
+                               .ToList();
 
+            return apps;
+                               
+                       
+        }
     }
 }

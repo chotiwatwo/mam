@@ -35,7 +35,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"userName\": \"ST12511\",\n\t\"password\": \"1234C@l\",\n\t\"IMEI\": \"123456789012345\",\n\t\"firebaseToken\": \"abcdefghijklmnopqrstuvwxyz\"\n}"
+							"raw": "{\n\t\"userId\": \"ST12511\",\n\t\"password\": \"1234C@l\",\n\t\"IMEI\": \"123456789012346\",\n\t\"firebaseToken\": \"cBxFRup4cS4:APA91bGhsPxrKujxaIcC2x9RZuqMzi_GKjOcY7VaPxpXbCswGZXi9DpcxjEpN5gR3076S8ZSAol7mDbK7yT2d-MyiJ3m2U8OGr7ibez6Y4ZmbTH7DQhmrVkmnSLGW0ZV9vr5_w0ob6jm\"\n}"
 						},
 						"url": {
 							"raw": "{{BaseURL}}/api/auth/login",
@@ -46,6 +46,38 @@
 								"api",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"ST12511\",\n\t\"IMEI\": \"123456789012346\"\n}"
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/auth/logout",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
 							]
 						}
 					},
@@ -198,7 +230,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Application",
+					"name": "Get Application Task List",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -230,7 +262,76 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"id": "65182553-2379-4f54-8b87-37964a67697a",
+							"name": "Get Application",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									},
+									{
+										"key": "Authorization",
+										"value": "{{Token}}",
+										"disabled": false
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{BaseURL}}/api/Apps/:appId",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"Apps",
+										":appId"
+									],
+									"variable": [
+										{
+											"key": "appId",
+											"value": "1561000419"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 16 Jun 2018 04:10:00 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"appId\":\"1561000419\",\"appOwnerId\":\"SP12309\",\"appOwner\":{\"id\":132,\"userId\":\"SP12309\",\"userName\":\"นายสุพจน์ โพธิ์สิง\",\"password\":\"0E6E8EE7EACBDF8AF125EBA2ABE28E12\",\"status\":\"A\",\"isDisable\":false,\"positionID\":\"POS0000005\",\"position\":null,\"departmentId\":\"DEPT000002\",\"department\":null,\"branchId\":\"15\",\"branch\":{\"id\":\"15\",\"name\":\"สุโขทัย\"},\"groupLevelId\":\"GL00000020\",\"groupLevel\":null},\"branchId\":\"15\",\"branch\":{\"id\":\"15\",\"name\":\"สุโขทัย\"},\"marketingAQT\":null,\"customer\":{\"id\":404219,\"appId\":\"1561000419\",\"newOrOld\":\"N\",\"titleId\":\"2\",\"firstNameThai\":\"วิภา\",\"lastNameThai\":\"แตงบาง\",\"cardType\":\"30\",\"idCardNo\":\"3659900056778\",\"addresses\":[{\"id\":1,\"customerId\":404219,\"addressType\":\"Address\",\"addressCode\":\"53860001116\",\"houseNo\":\"109/1\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"1\",\"soi\":\"\",\"road\":\"\",\"districtId\":null,\"district\":null,\"amphurId\":null,\"provinceId\":44,\"zipCode\":\"53210\",\"apartment\":\"\"},{\"id\":2,\"customerId\":404219,\"addressType\":\"Current\",\"addressCode\":\"\",\"houseNo\":\"109/1\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"1\",\"soi\":\"\",\"road\":\"\",\"districtId\":4624,\"district\":{\"id\":4624,\"amphurId\":5308,\"amphur\":null,\"name\":\"ไผ่ล้อม\",\"status\":\"A\"},\"amphurId\":5308,\"provinceId\":44,\"zipCode\":\"53210\",\"apartment\":\"\"},{\"id\":3,\"customerId\":404219,\"addressType\":\"Debt\",\"addressCode\":\"\",\"houseNo\":\"\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"\",\"soi\":\"\",\"road\":\"\",\"districtId\":0,\"district\":null,\"amphurId\":0,\"provinceId\":0,\"zipCode\":\"\",\"apartment\":\"\"},{\"id\":4,\"customerId\":404219,\"addressType\":\"Document\",\"addressCode\":\"\",\"houseNo\":\"109/1\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"1\",\"soi\":\"\",\"road\":\"\",\"districtId\":null,\"district\":null,\"amphurId\":null,\"provinceId\":44,\"zipCode\":\"53210\",\"apartment\":\"\"},{\"id\":5,\"customerId\":404219,\"addressType\":\"Office\",\"addressCode\":\"\",\"houseNo\":\"109/1\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"1\",\"soi\":\"\",\"road\":\"\",\"districtId\":4624,\"district\":{\"id\":4624,\"amphurId\":5308,\"amphur\":null,\"name\":\"ไผ่ล้อม\",\"status\":\"A\"},\"amphurId\":5308,\"provinceId\":44,\"zipCode\":\"53210\",\"apartment\":\"\"},{\"id\":6,\"customerId\":404219,\"addressType\":\"Other\",\"addressCode\":\"\",\"houseNo\":\"\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"\",\"soi\":\"\",\"road\":\"\",\"districtId\":0,\"district\":null,\"amphurId\":0,\"provinceId\":0,\"zipCode\":\"\",\"apartment\":\"\"},{\"id\":7,\"customerId\":404219,\"addressType\":\"Person\",\"addressCode\":\"53860001116\",\"houseNo\":\"\",\"floor\":\"\",\"roomNo\":\"\",\"moo\":\"\",\"soi\":\"\",\"road\":\"\",\"districtId\":0,\"district\":null,\"amphurId\":0,\"provinceId\":0,\"zipCode\":\"\",\"apartment\":\"\"}]}}"
+						}
+					]
 				},
 				{
 					"name": "Get Provinces",
@@ -1297,7 +1398,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"to\": \"cBxFRup4cS4:APA91bGhsPxrKujxaIcC2x9RZuqMzi_GKjOcY7VaPxpXbCswGZXi9DpcxjEpN5gR3076S8ZSAol7mDbK7yT2d-MyiJ3m2U8OGr7ibez6Y4ZmbTH7DQhmrVkmnSLGW0ZV9vr5_w0ob6jm\",\r\n    \r\n    \"notification\": {\r\n    \t\"title\" : \"Notice Title\",\r\n    \t\"body\": \"Notice Body\"\r\n    },\r\n    \r\n    \"data\": {\r\n        \"title\": \"ผลการตรวจ NCB\",\r\n        \"appId\": \"0161000999\",\r\n        \"body\": \"ผ่านนะ\",\r\n        \"senderDepartment\": \"Credit Checking\",\r\n        \"senderUsername\": \"กิตต์รวี\",\r\n        \"sentTime\": \"2018-06-07T13:05:07.1211272+07:00\",\r\n        \"actionName\": \"NCB\"\r\n    }\r\n}"
+							"raw": "{\r\n    \"to\": \"cBxFRup4cS4:APA91bGhsPxrKujxaIcC2x9RZuqMzi_GKjOcY7VaPxpXbCswGZXi9DpcxjEpN5gR3076S8ZSAol7mDbK7yT2d-MyiJ3m2U8OGr7ibez6Y4ZmbTH7DQhmrVkmnSLGW0ZV9vr5_w0ob6jm\",\r\n    \r\n    \"notification\": {\r\n    \t\"title\" : \"Notification Title 5\",\r\n    \t\"body\": \"นี่คือ Body ของ Notification 555\"\r\n    },\r\n    \r\n    \"data\": {\r\n        \"title\": \"ผลการตรวจ NCB\",\r\n        \"appId\": \"0161000999\",\r\n        \"body\": \"ผ่านนะ\",\r\n        \"senderDepartment\": \"Credit Checking\",\r\n        \"senderUsername\": \"กิตต์รวี\",\r\n        \"sentTime\": \"2018-06-07T13:05:07.1211272+07:00\",\r\n        \"actionName\": \"NCB\"\r\n    }\r\n}"
 						},
 						"url": {
 							"raw": "{{BaseURL}}/api/messages/send",
@@ -1308,6 +1409,51 @@
 								"api",
 								"messages",
 								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Submit to VER",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Application Task List",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{BaseURL}}/api/Apps/search?pageNo=3&pageSize=30",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"Apps",
+								"search"
+							],
+							"query": [
+								{
+									"key": "pageNo",
+									"value": "3"
+								},
+								{
+									"key": "pageSize",
+									"value": "30"
+								}
 							]
 						}
 					},

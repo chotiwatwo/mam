@@ -9,6 +9,7 @@ using MamApi.Services;
 
 namespace MamApi.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/auth")]
     public class AuthController : Controller
@@ -31,6 +32,7 @@ namespace MamApi.Controllers
             return Ok("Test Authorize OK");
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginResource loginResource)
         {
@@ -39,12 +41,14 @@ namespace MamApi.Controllers
                 if (loginResource == null)
                     return BadRequest("ข้อมูลในการ Login ไม่ถูกต้อง");
 
-                var user = _authService.CheckCredential(loginResource.Username, loginResource.Password);
+                var user = _authService.CheckCredential(loginResource.UserId, loginResource.Password);
 
                 if (user == null)
-                    return NotFound("Username หรือ Password ไม่ถูกต้อง");
+                    return NotFound("User Id หรือ Password ไม่ถูกต้อง");
 
                 var userProfileResource = _mapper.Map<User, UserProfileResource>(user);
+
+                long currentLoginId = _authService.SaveCurrentLogin(loginResource);
 
                 // ไว้ค่อย Check IMIE ใน DB อีกที
                 userProfileResource.IMIE = loginResource.IMEI;
@@ -60,13 +64,25 @@ namespace MamApi.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
-                
+                return StatusCode(500, $"Login : Error occurs => {ex} ");
             }
 
-            return BadRequest("Fail to generate token");
         }
-        
+
+        [HttpPost("logout")]
+        public IActionResult Logout([FromBody] LogoutResource logoutResource)
+        {
+            if (logoutResource == null)
+                return BadRequest(new ErrorMessage { ErrorText = "ข้อมูล Logout ไม่ถูกต้อง" });
+
+            if (string.IsNullOrEmpty(logoutResource.UserId))
+            {
+                return BadRequest(new ErrorMessage { ErrorText = "โปรดระบุ User Id" });
+            }
+
+            DateTime logoutTime = _authService.Logout(logoutResource.UserId);
+
+            return Ok($"Logout Succeed : { logoutTime }");
+        }
     }
 }

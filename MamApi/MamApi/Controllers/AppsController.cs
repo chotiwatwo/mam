@@ -15,7 +15,7 @@ namespace MamApi.Controllers
 {
     [Authorize]
     [Produces("application/json")]
-    [Route("api/Apps")]
+    [Route("api/apps")]
     public class AppsController : Controller
     {
         private readonly IAppService _appService;
@@ -35,9 +35,21 @@ namespace MamApi.Controllers
             return Ok("Yes");
         }
 
-        [HttpGet]
-        public IActionResult GetApps() {
-            var apps = _appService.GetApps();
+        //[AllowAnonymous]
+        //[HttpGet("pages/{pageNo}")]
+        //public IActionResult GetApps(int pageNo) {
+        //    var apps = _appService.GetApps(pageNo);
+
+        //    return Ok(apps);
+        //}
+
+        //[AllowAnonymous]
+        [HttpPost("search")]
+        public IActionResult SearchApps([FromQuery] int pageNo = 1, [FromQuery] int pageSize = 10)
+        {
+            int maxPageSize = (pageSize > 50) ? 50 : pageSize;
+
+            var apps = _appService.GetApps(pageNo, maxPageSize);
 
             return Ok(apps);
         }
@@ -118,7 +130,7 @@ namespace MamApi.Controllers
 
                 MktCustomer customer = new MktCustomer()
                 {
-                    CardType = createAppResource.CardType,
+                    CardTypeId = createAppResource.CardType,
                     IDCardNo = createAppResource.IDCardNo,
                     NewOrOld = BusinessConstant.CustomerNewType,
                     TitleId = createAppResource.TitleId,
@@ -282,12 +294,12 @@ namespace MamApi.Controllers
             CheckNCBAppResource checkNCBApp, MktCustomer customer)
         {
             customer.NewOrOld = checkNCBApp.NewOrOldCustomer;
-            customer.CardType = checkNCBApp.CardType;
+            customer.CardTypeId = checkNCBApp.CardType;
             customer.IDCardNo = checkNCBApp.IDCardNo;
             customer.TitleId = checkNCBApp.TitleId;
             customer.FirstNameThai = checkNCBApp.FirstNameThai;
             customer.LastNameThai = checkNCBApp.LastNameThai;
-            customer.Sex = checkNCBApp.SexId;
+            customer.SexId = checkNCBApp.SexId;
             customer.BirthDate = checkNCBApp.BirthDate;
 
             if ((customer.Addresses == null) || customer.Addresses.Count == 0)

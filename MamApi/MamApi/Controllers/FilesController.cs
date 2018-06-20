@@ -279,8 +279,16 @@ namespace MamApi.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet("image/download")]
+        public IActionResult GetImage()
+        {
+            var image = System.IO.File.OpenRead(@"D:\\Temp\\1.jpg");
 
+            var fileStream = File(image, "image/jpeg");
 
+            return fileStream;
+        }
 
     }
 }

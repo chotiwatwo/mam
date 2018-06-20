@@ -63,7 +63,7 @@ namespace MamApi.Services
                 app.Customer.CreatedBy = app.AppOwnerId;
                 app.Customer.CreatedDate = DateTime.Now;
 
-                app.Customer.Sex = GetCustomerSexFromTitle(app.Customer.TitleId);
+                app.Customer.SexId = GetCustomerSexFromTitle(app.Customer.TitleId);
 
                 MktAsset asset = new MktAsset {
                     CustomerId = app.Customer.Id,
@@ -289,11 +289,12 @@ namespace MamApi.Services
             return appToCheckNCB;
         }
 
-        public IEnumerable<MktApplication> GetApps()
+        public IEnumerable<object> GetApps(int pageNo, int pageSize)
         {
-            var apps = _appRepo.FindByInclude(
-                            a => a.AppId.StartsWith("0161"), 
-                            b => b.Branch);
+            //var apps = _appRepo.FindByInclude(
+            //                a => a.AppId.StartsWith("0161"), 
+            //                b => b.Branch);
+            var apps = _appRepo.GetAppsByPage(pageNo, pageSize);
 
             return apps;
         }

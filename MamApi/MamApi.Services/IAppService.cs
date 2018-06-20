@@ -7,7 +7,7 @@ namespace MamApi.Services
 {
     public interface IAppService
     {
-        IEnumerable<MktApplication> GetApps();
+        IEnumerable<object> GetApps(int pageNo, int pageSize);
 
         MktApplication GetApp(string appId);
 

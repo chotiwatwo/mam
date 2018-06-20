@@ -26,7 +26,7 @@ namespace MamApi.Mapping
                 .ForMember(chk => chk.NewOrOldCustomer,
                     opt => opt.MapFrom(a => a.Customer.NewOrOld))
                 .ForMember(chk => chk.CardType,
-                    opt => opt.MapFrom(a => a.Customer.CardType))
+                    opt => opt.MapFrom(a => a.Customer.CardTypeId))
                 .ForMember(chk => chk.IDCardNo,
                     opt => opt.MapFrom(a => a.Customer.IDCardNo))
                 .ForMember(chk => chk.TitleId,
@@ -36,7 +36,7 @@ namespace MamApi.Mapping
                 .ForMember(chk => chk.LastNameThai,
                     opt => opt.MapFrom(a => a.Customer.LastNameThai))
                 .ForMember(chk => chk.SexId,
-                    opt => opt.MapFrom(a => a.Customer.Sex));
+                    opt => opt.MapFrom(a => a.Customer.SexId));
 
             // Get Full App => appService.GetApp()
             CreateMap<MktApplication, ApplicationResource>();

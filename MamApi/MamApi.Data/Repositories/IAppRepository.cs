@@ -1,5 +1,6 @@
 ﻿using MamApi.Models;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Collections.Generic;
 
 namespace MamApi.Data.Repositories
 {
@@ -14,6 +15,8 @@ namespace MamApi.Data.Repositories
         MktApplication GetShortApp(string appId);
 
         MktApplication GetFullApp(string appId);
+
+        IEnumerable<object> GetAppsByPage(int pageNo, int pageSize);
 
         int UpdateApplicationCurrentCarId(long currentCarId, string appId, IDbContextTransaction contextTransaction);
 

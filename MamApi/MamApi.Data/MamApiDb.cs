@@ -36,6 +36,7 @@ namespace MamApi.Data
         public DbSet<District> Districts { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
+        public DbSet<CurrentLoginMAM> CurrentLogin { get; set; }
 
         public MamApiDb(DbContextOptions<MamApiDb> options) : base(options)
         {
@@ -201,6 +202,10 @@ namespace MamApi.Data
             modelBuilder
                 .Entity<Parameter>()
                 .ToTable("Parameter");
+
+            modelBuilder
+                .Entity<CurrentLoginMAM>()
+                .ToTable("CurrentLoginMAM");
         }
     }
 }

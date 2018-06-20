@@ -9,6 +9,6 @@ namespace MamApi.Data.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        //User CheckCredential(string userName, string password);
+
     }
 }

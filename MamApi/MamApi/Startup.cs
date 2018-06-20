@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Serilog;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace MamApi
 {
@@ -72,7 +73,9 @@ namespace MamApi
             services.AddSingleton(_configuration);
 
             services.AddDbContext<MamApiDb>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("MAMDb")));
+                options.UseSqlServer(_configuration.GetConnectionString("MAMDb"), 
+                b => b.UseRowNumberForPaging())                       
+            );
 
             // Register MAM Services
             services.AddScoped<IAuthService, AuthService>();
@@ -87,6 +90,7 @@ namespace MamApi
             services.AddTransient<IParameterRepository, ParameterRepository>();
             services.AddTransient<IAttachmentRepository, AttachmentRepository>();
             services.AddTransient<ICreditCheckingRepository, CreditCheckingRepository>();
+            services.AddTransient<ILoginRepository, LoginRepository>();
 
             //services.AddCors();
 

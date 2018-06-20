@@ -10,14 +10,14 @@ namespace MamApi.Services
 {
     public interface IAuthService
     {
-        User CheckCredential(string userName, string password);
+        User CheckCredential(string userId, string password);
 
         object CreateToken(UserProfileResource userProfile, string issuer, string privateKey);
 
-        //Task<string> GetBranchIdFromUserProfile(HttpContext httpContext);
-
-        //Task<string> GetUserIdFromUserProfile(HttpContext httpContext);
-
         Task<UserProfile> GetUserProfileFromToken(HttpContext httpContext);
+
+        long SaveCurrentLogin(LoginResource userProfile);
+
+        DateTime Logout(string userId);
     }
 }
